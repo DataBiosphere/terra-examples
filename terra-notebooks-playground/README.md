@@ -7,6 +7,7 @@ The notebooks available in this workspace are listed below. It is important that
 * **Python**
     * ***Python environment setup***
     * *Py3 - How to read data from BigQuery*
+    * Py3 - How to use a cohort
     * Py3 - How to use Facets for interactive visualization of data.ipynb
     * Py3 - How to load data to BigQuery.ipynb
 * **R**
