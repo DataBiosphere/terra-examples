@@ -1,3 +1,10 @@
+**IMPORTANT NOTE FOR USERS NEW TO JUPYTER NOTEBOOKS:**
+
+* *Setup* notebooks are used to set up computational environments that are language-specific. This means that if a workspace contains both Python and R-based notebooks, and has *Setup* notebooks to run beforehand, users must run the appropriate *Setup* notebook before running subsequent notebooks *in that language*. In other words, if you run the ***R Environment Setup*** notebook in this workspace, and then attempt to run the Python-based notebooks, it will not work. To fix this, you will need to run the ***Python Environment Setup*** notebook within this cluster first.
+
+* Not all warning messages are bad! Often you will run a cell that will return warnings in the output (sometimes these warnings will even be alarmingly color-coded in red or pink). This does not mean that the cell was not successful, and these warnings can often be ignored.
+
+
 **A workspace for trying out Terra functionality as it evolves**.
 
 Terra includes multiple tools for interactive computational analysis, including Jupyter, a web-based application that supports code in a variety of languages (R and Python, among others), and streamlines interaction with cloud-based resources. This workspace contains a set of Jupyter Notebooks that allow users to play with this functionality, and the notebooks are organized into two categories: **R** and **Python**.
