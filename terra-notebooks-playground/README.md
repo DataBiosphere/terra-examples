@@ -84,3 +84,15 @@ If you are developing R packages:
 * [ggplot2 cheatsheet](https://www.rstudio.com/resources/cheatsheets/#ggplot2) 
 * [R Graph Gallery](https://www.r-graph-gallery.com/) inspiration and help with R Graphics
 * [This is the most important tip of all ;-)](https://flowingdata.com/2012/06/07/always-label-your-axes/)
+
+---
+
+### Contact information
+
+In addition to Terra support, you can also reach us on GitHub by [filing an issue](https://github.com/DataBiosphere/notebooks/issues).
+
+### License
+Please see the BSD-3-Clause [license on GitHub](https://github.com/DataBiosphere/notebooks/blob/master/LICENSE.md)
+
+### Workspace Change Log
+Please see the [pull request history](https://github.com/DataBiosphere/notebooks/pulls?q=is%3Apr+) on GitHub.
