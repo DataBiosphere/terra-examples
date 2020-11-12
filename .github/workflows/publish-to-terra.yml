@@ -15,6 +15,10 @@ on:
     tags:
       - v*
 
+    TODO(deflaux) remove this after testing is complete.
+    branches: [ terra-publish ]
+
+
 env:
   # TO REUSE THIS TEMPLATE, change these values to reflect those of your destination Terra workspace.
   NAMESPACE: 'fc-product-demo'
@@ -23,7 +27,7 @@ env:
 
 jobs:
 
-  push:
+  deploy_to_terra:
     runs-on: ubuntu-latest
 
     steps:
