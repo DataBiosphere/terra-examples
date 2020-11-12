@@ -1,0 +1,61 @@
+name: Publish to Terra
+
+on:
+  workflow_dispatch:
+    # Allows manually triggering workflow in GitHub UI on selected branch.
+    # GitHub doc: https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows#workflow_dispatch.
+    # GitHub blog demo: https://github.blog/changelog/2020-07-06-github-actions-manual-triggers-with-workflow_dispatch/.
+
+  push:
+    # Publish `v1.2.3` tags as releases.
+    tags:
+      - v*
+
+env:
+  NAMESPACE: 'fc-product-demo'
+  WORKSPACE: 'github-action-deploy-to-terra'
+  WORKSPACE_BUCKET: 'fc-33f00650-4555-4140-a4ea-9014f85c58e7'
+
+jobs:
+
+  push:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.7
+
+    - name: Setup gcloud CLI
+      uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+      # https://github.com/google-github-actions/setup-gcloud/blob/master/setup-gcloud/README.md
+      with:
+        version: '290.0.1'
+        service_account_key: ${{ secrets.TERRA_SECRET }}
+        export_default_credentials: true
+
+    - name: Publish dashboard and notebooks
+      run: |
+        cd terra-notebooks-playground/
+
+        # Install the Terra client.
+        pip install firecloud==0.16.25
+
+        # Publish notebooks
+        gsutil -m cp *.ipynb "gs://${WORKSPACE_BUCKET}/notebooks/"
+
+        # Publish dashboard markdown
+        python << EOF
+
+        import firecloud.api as fapi
+        with open('README.md') as f:
+          fapi.update_workspace_attributes(
+              namespace="$NAMESPACE",
+              workspace="$WORKSPACE",
+              attrs=[fapi._attr_set(attr='description', value=f.read())]).json()
+
+        EOF
