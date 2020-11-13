@@ -15,7 +15,7 @@ on:
     tags:
       - v*
 
-    TODO(deflaux) remove this after testing is complete.
+    # TODO(deflaux) remove this after testing is complete.
     branches: [ terra-publish ]
 
 
