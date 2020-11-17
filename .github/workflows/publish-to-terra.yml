@@ -15,9 +15,9 @@ on:
 
 env:
   # TO REUSE THIS TEMPLATE, change these values to reflect those of your destination Terra workspace.
-  NAMESPACE: 'fc-product-demo'
-  WORKSPACE: 'github-action-deploy-to-terra'
-  WORKSPACE_BUCKET: 'fc-33f00650-4555-4140-a4ea-9014f85c58e7'
+  NAMESPACE: 'help-gatk'
+  WORKSPACE: 'Terra Notebooks Playground'
+  WORKSPACE_BUCKET: 'fc-6aca927c-4f84-4c72-b0a4-03819cce9a9d'
 
 jobs:
 
