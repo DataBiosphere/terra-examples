@@ -13,12 +13,13 @@ Terra includes multiple tools for interactive computational analysis, including 
 The notebooks available in this workspace are listed below. If you are entirely new to Jupyter and are not sure where to start, try the first two notebooks at the top of each list (italics)!
 
 * **Python**
-    * *Py3 - How to read data from BigQuery*
-    * Py3 - How to use a cohort
+    * *Py3 - How to read data from BigQuery.ipynb*
+    * Py3 - How to use a cohort.ipynb
     * Py3 - How to use Facets for interactive visualization of data.ipynb
     * Py3 - How to load data to BigQuery.ipynb
+    * Py3 - How to store analysis results in BigQuery and Cloud Storage.ipynb
 * **R**
-    * *R - How to read data from BigQuery*
+    * *R - How to read data from BigQuery.ipynb*
     * R - How to retrieve a cohort.ipynb
     * R - Analysis example for exploring power law distributions.ipynb
     * R - Plotting example for Boston 311 data.ipynb
