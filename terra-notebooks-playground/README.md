@@ -29,6 +29,8 @@ The notebooks available in this workspace are listed below. If you are entirely 
     * R - How to load data to BigQuery.ipynb
     * R - How to pull in reusable code from source control.ipynb
     * R - How to save and load R objects from the workspace bucket.ipynb
+* **Notebook-based tools**
+    * Create HTML snapshots of notebooks.ipynb
 
 PLEASE NOTE:
 
