@@ -36,7 +36,7 @@ The notebooks show:
 
 [Vertex Pipelines](https://cloud.google.com/vertex-ai/docs/pipelines) lets you codify your machine learning workflow, supporting workflow reproducibility, composability, collaboration, and more.
 
-On [Terra](http://app.terra.bio), these notebooks similarly require a ['connected' GCP project](https://support.terra.bio/hc/en-us/articles/360051229072-Accessing-advanced-GCP-features-in-Terra).
+On [Terra](http://app.terra.bio), these notebooks similarly require a ['native’ GCP project](https://support.terra.bio/hc/en-us/articles/360051229072-Accessing-advanced-GCP-features-in-Terra).
 
 The [03_vertex_pipelines_pcam](./03_vertex_pipelines_pcam.ipynb) notebook shows, in addition to the concepts introduced in the notebook above:
 

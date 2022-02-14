@@ -24,6 +24,7 @@ FINE_TUNING_EPOCHS = 3
 
 
 def _get_compiled_model(lr, image_height, image_width, num_classes):
+    """Return a compiled Keras model."""
     base_model = keras.applications.Xception(
         weights="imagenet",
         input_shape=(image_height, image_width, 3),

@@ -13,18 +13,11 @@ import tensorflow as tf
 import tensorflow_datasets as tfds
 from tensorflow.keras.preprocessing import image_dataset_from_directory
 
-# DEBUG_LABELS = [
-#     "females",
-#     "gynandromorph",
-#     "intersex",
-#     "males",
-#     "multiple-males",
-#     "multiple-nonmales",
-# ]
 # PATCH_CAMELYON_LABELS = ['non_metastatic', 'metastatic']
 
 
 def generate_camelyon_datasets(batch_size):
+    """Fetch, construct, and return PatchCamlyon datasets."""
     ds, ds_info = tfds.load("patch_camelyon", with_info=True, as_supervised=True)
 
     # Get the train, validation and test datasets
@@ -68,7 +61,9 @@ def generate_debug_datasets(
 
 
 def create_debug_datasets(dir_path, base_batch_size, num_acc, image_size):
-    print(f"in create_datasets with base batch size {base_batch_size} and num_acc {num_acc}")
+    print(
+        f"in create_datasets with base batch size {base_batch_size} and num_acc {num_acc}"
+    )
     training_set = image_dataset_from_directory(
         dir_path,
         shuffle=True,
@@ -112,7 +107,9 @@ def get_model_dirs(save_dir, checkpoint_dir):
         tf_config = json.loads(tf_config)
 
         if not _is_chief(tf_config["task"]["type"], tf_config["task"]["index"]):
-            save_dir = os.path.join(save_dir, "worker-{}").format(tf_config["task"]["index"])
+            save_dir = os.path.join(save_dir, "worker-{}").format(
+                tf_config["task"]["index"]
+            )
             checkpoint_dir = os.path.join(checkpoint_dir, "worker-{}").format(
                 tf_config["task"]["index"]
             )
@@ -124,6 +121,7 @@ def get_model_dirs(save_dir, checkpoint_dir):
 
 
 def copy_data(gcs_path, local_path):
+    """Utility to copy a zip file and unpack it locally."""
     # copy the zip file with the model data
     local_file = f"{local_path}/model_data.zip"
     print(f"copying data from {gcs_path} to {local_file}")
@@ -148,7 +146,10 @@ def copy_data(gcs_path, local_path):
 
 
 def define_callbacks(log_dir, checkpoint_dir):
-    tensorboard_callback = tf.keras.callbacks.TensorBoard(log_dir=log_dir, update_freq=300)
+    """Define TensorBoard and model checkpoint training callbacks."""
+    tensorboard_callback = tf.keras.callbacks.TensorBoard(
+        log_dir=log_dir, update_freq=300
+    )
     model_checkpoint_callback = tf.keras.callbacks.ModelCheckpoint(
         filepath=checkpoint_dir,
         #     save_weights_only=True,
@@ -161,6 +162,7 @@ def define_callbacks(log_dir, checkpoint_dir):
 
 
 def generate_metrics(validation_set, model, num_classes):
+    """Generate metrics info from a training session."""
     ma = tf.keras.metrics.AUC()
     mp = tf.keras.metrics.Precision()
     mr = tf.keras.metrics.Recall()
