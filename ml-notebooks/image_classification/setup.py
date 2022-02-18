@@ -11,7 +11,8 @@ REQUIRED_PACKAGES = ['cloudml-hypertune']
 
 setup(
     name='trainer',
-    version='0.6',
+    version='0.7',
+    python_requires='>=3.6',
     install_requires=REQUIRED_PACKAGES,
     packages=find_packages(),
     include_package_data=True,

@@ -16,7 +16,7 @@ The [01_keras_pcam](./01_keras_pcam.ipynb) notebook shows in-notebook model trai
 
 It works on all notebook platforms without requiring access to [Vertex AI](https://cloud.google.com/vertex-ai), or any other Google Cloud Platform (GCP) services aside from Cloud Storage (GCS).  It shows how to build a Keras image classification model, and how to do _transfer learning_ and model _fine-tuning_.
 
-Given the size of the dataset and model architecture, this example requires an 8-core notebook VM, and the notebook should use an attached GPU to run in a reasonable time frame.  On CWB Terra, you can use the default GATK image customized to use 8 CPUs and 1 GPU.
+Given the size of the dataset and model architecture, this example requires a 2-core notebook VM, and the notebook should use an attached GPU to run in a reasonable time frame.  On CWB Terra, you can use the default GATK image customized to use 2 CPUs and 1 GPU. The default NVIDIA Tesla T4 works fine.
 
 ### Using Vertex AI Training, and the Vertex Experiments API
 
