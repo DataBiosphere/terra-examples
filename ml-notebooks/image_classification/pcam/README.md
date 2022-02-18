@@ -10,6 +10,10 @@ The model uses one of Keras' prebuilt model architectures, [Xception](https://ke
 
 ## About the notebook examples
 
+### 'Setup' notebook
+
+Run the [00_pcam_setup](./00_pcam_setup.ipynb) notebook first.
+
 ### In-notebook training example
 
 The [01_keras_pcam](./01_keras_pcam.ipynb) notebook shows in-notebook model training (rather than calling out to a cloud service to do the training).

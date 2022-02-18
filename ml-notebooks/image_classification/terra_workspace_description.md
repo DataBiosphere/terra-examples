@@ -22,6 +22,10 @@ The examples use Keras, specifically one of Keras' prebuilt model architectures,
 
 ## About the example notebooks
 
+### 'Setup' notebook
+
+Run the **00_pcam_setup** notebook first.
+
 ### In-notebook training example
 
 The  **01_keras** notebook shows in-notebook model training (rather than calling out to a cloud service to do the training).
