@@ -1,4 +1,3 @@
-
 # Image Classification notebook examples
 
 This workspace holds a series of image classification machine learning examples.
@@ -7,7 +6,7 @@ All of these examples **run best with GPU(s)** -- the training runs fine using o
 The different notebooks have different computational requirements.  See the information at the top of each notebook for details.
 
 - For the **01_keras_pcam** notebook, you'll need at least 2 cores and a GPU.
-- For the other notebooks, the GPU-based config is set up at the the Vertex AI end, and so the notebook environment can use 1 core and does not require GPUs.
+- For the other notebooks, the GPU-based config is set up at the [Vertex AI](https://cloud.google.com/vertex-ai) end, and so the notebook environment can use 1 core and does not require GPUs.
 
 ## About the dataset and the machine learning task
 
@@ -17,22 +16,22 @@ The different notebooks have different computational requirements.  See the info
 The [PatchCamelyon benchmark](https://www.tensorflow.org/datasets/catalog/patch_camelyon) consists of 327.680 color images (96 x 96px) extracted from histopathologic scans of lymph node sections. Each image is annotated with a binary label indicating presence of metastatic tissue.
 
 
-The examples use Keras, specifically one of Keras' prebuilt model architectures, [Xception](https://keras.io/api/applications/xception/). The training does [_transfer learning_](https://en.wikipedia.org/wiki/Transfer_learning) , bootstrapping from model weights trained on the ['imagenet'](https://en.wikipedia.org/wiki/ImageNet) dataset.
+The examples use Keras, specifically one of Keras' prebuilt model architectures, [Xception](https://keras.io/api/applications/xception/). The training does [_transfer learning_](https://en.wikipedia.org/wiki/Transfer_learning), bootstrapping from model weights trained on the ['imagenet'](https://en.wikipedia.org/wiki/ImageNet) dataset.
 
 
 ## About the example notebooks
 
 ### 'Setup' notebook
 
-Run the **00_pcam_setup** notebook first.
+You'll need to run the **00_pcam_setup** notebook first, for all notebooks except the **01_keras_pcam** notebook.
 
 ### In-notebook training example
 
 The  **01_keras** notebook shows in-notebook model training (rather than calling out to a cloud service to do the training).
 
-It works on all notebook platforms without requiring access to [Vertex AI]((https://cloud.google.com/vertex-ai), or any other Google Cloud Platform (GCP) services aside from Cloud Storage (GCS).  They show how to build a Keras image classification model, and how to do _transfer learning_.
+It works on all notebook platforms without requiring access to [Vertex AI]((https://cloud.google.com/vertex-ai), or any other Google Cloud Platform (GCP) services aside from Cloud Storage (GCS).  It shows how to build a Keras image classification model, and how to do _transfer learning_.
 
-Given the size of the Debug dataset and model architecture, this example requires a 2-core notebook VM, and the notebook should use an attached GPU to run in a reasonable time frame.
+Given the size of the dataset and model architecture, this example requires a 2-core notebook VM, and the notebook should use an attached GPU to run in a reasonable time frame.
 
 You can use the default GATK image customized to use 2 CPUs and 1 GPU. The default NVIDIA Tesla T4 is fine.
 
@@ -54,7 +53,7 @@ The notebooks show:
 
 [Vertex Pipelines](https://cloud.google.com/vertex-ai/docs/pipelines) lets you codify your machine learning workflow, supporting workflow reproducibility, composability, collaboration, and more.
 
-These notebooks require a ['native' GCP account](https://support.terra.bio/hc/en-us/articles/360051229072-Accessing-advanced-GCP-features-in-Terra).
+This notebook requires a ['native' GCP account](https://support.terra.bio/hc/en-us/articles/360051229072-Accessing-advanced-GCP-features-in-Terra).
 
 The **03_vertex_pipelines** notebook shows, in addition to the concepts introduced in the notebook above:
 
