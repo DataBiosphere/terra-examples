@@ -18,6 +18,7 @@ The notebooks available in this workspace are listed below. If you are entirely 
     * Py3 - How to use Facets for interactive visualization of data.ipynb
     * Py3 - How to load data to BigQuery.ipynb
     * Py3 - How to store analysis results in BigQuery and Cloud Storage.ipynb
+    * Py3 - How to use IGV in a Terra notebook.ipynb
 * **R**
     * *R - How to read data from BigQuery.ipynb*
     * R - How to retrieve a cohort.ipynb
