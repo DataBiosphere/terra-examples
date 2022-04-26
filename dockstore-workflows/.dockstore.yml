@@ -1,0 +1,6 @@
+version: 1.0
+workflows:
+  - subclass: WDL
+  authors:
+    - name: Emma Rogge
+      email: emmarogge@google.com
