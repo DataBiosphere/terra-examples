@@ -247,16 +247,19 @@ The following instructions show you how to access the workspace bucket.
 
 1. Open a workspace
 
-2. If not already on the **DASHBOARD** tab, click on **DASHBOARD**
+2. If not already on the **DASHBOARD** tab, click on **DASHBOARD**:
+
 ![about the workspace](./images/about_the_wkspce.png)
 
-3. In the lower right corner in the Google Bucket section, click on **Open in browser**
+3. In the lower right corner in the Google Bucket section, click on **Open in browser**:
+
    ![google bucket](./images/google_bucket.png)
 
 <!-- Note that the bucket is a [multi-region](https://cloud.google.com/storage/docs/locations) bucket, by default, providing geo-redundancy. In the future a feature might be added to place buckets into specific user-selectable regions. -->
 
 4. The Google Cloud Platform Cloud Console opens and shows the workspace bucket in GCS including any objects stored in the bucket. In your environment you might observe different content from what is shown here.
-![gcp_console](./images/gcp_console.png "gcp_console")
+
+   ![gcp_console](./images/gcp_console.png "gcp_console")
 
 
 The next section shows you how to access the **persistent disk**.
@@ -454,15 +457,18 @@ Since your notebook (or several notebooks) are automatically synchronized to the
 In order to access a notebook that you created in a separate directory, follow these steps:
 
 1. Open a regular notebook
-2. Click on the Jupyter icon
+2. Click on the Jupyter icon:
+
    ![Jupyter icon](./images/7dKkSFiTPXxbYtW.png "Jupyter icon")
 
 3. Once you click on the Jupyter icon, a directory browser with the content of the persistent disk is displayed:
+
    ![directory browser](./images/9yYburvcrR6Mqfx.png "directory browser")
 
 
 4. In this example, the directory containing private notebooks was created with the name `no-sync` (you can choose your own name)
 5. When you click at your directory containing private notebooks, the directory contents are displayed:
+
    ![directory contents](./images/BTTwgto43XxDVKV.png "directory contents")
 
 6. Click on the notebook you want to edit and it opens another browser tab displaying the Jupyter notebook.
