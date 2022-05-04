@@ -394,7 +394,7 @@ If you like, you can remove your clone of the GitHub repository by deleting its 
 
 In the terminal, change to the parent directory of your repository clone.  You should see `site-selection-tool`  listed when you run  `ls`.
 
-**The next command removes the <code>site-selection-tool</code> directory and all its contents</strong>. Be careful to not accidentally delete directories that you do not mean to delete. The safe approach would be to navigate into the directory and delete from one level down.
+**The next command removes the <code>site-selection-tool</code> directory and all its contents**. Be careful to not accidentally delete directories that you do not mean to delete. The safe approach would be to navigate into the directory and delete from one level down.
 
 
 ```sh

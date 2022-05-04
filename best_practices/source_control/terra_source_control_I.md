@@ -357,7 +357,7 @@ As you'll see later on, the relationship manifests itself by source code being m
 
 An important architectural aspect to point out is that GitHub and Terra are two independent systems. This means that their storage, their management, their authentication and authorization settings are independent of each other.
 
-The relationship between a Terra cloud environment and a GitHub repository is managed by you manually and this solution shows you the major use cases that you might encounter.
+You must manually manage the relationship between a Terra cloud environment and a GitHub repository. This section documents the major use cases you might encounter.
 
 
 ### Current workspace architecture
