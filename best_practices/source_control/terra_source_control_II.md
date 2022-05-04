@@ -324,12 +324,9 @@ The first step is to clone [the repository](https://github.com/DataBiosphere/ter
    ```sh
    git remote -v
    ```
-This shows you the location of the remote repository in GitHub:
+   This shows you the location of the remote repository in GitHub:
 
-<p id="gdcalert9" ><span style="color: red; font-weight: bold">>>>>  GDC alert: inline image link here (to images/image8.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert10">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>> </span></p>
-
-
-![alt_text](images/image8.png "image_tooltip")
+   ![](images/7HsFKzFh9DmYorW.png "")
 
 Now you have cloned a remote repository into your cloud environment. The directory is the local repository and is linked to the remote repository. You may want to explore the directory more, especially the `notebooks` subdirectory.
 
