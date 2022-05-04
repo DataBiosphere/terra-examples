@@ -50,11 +50,11 @@ Last Updated: 30/03/2022 -->
 
 # Introduction and Scope
 
-This series of documents describes best practices for source code control in [Terra Workspaces](https://app.terra.bio/) for artifacts like [notebooks](https://support.terra.bio/hc/en-us/articles/360059009571-Notebooks-Quickstart-Guide), [Python and R packages](xxx) or [workflows](https://support.terra.bio/hc/en-us/articles/360034701991-Pipelining-with-workflows). The goal of this solution is to enable you to manage, share and collaborate on artifacts effectively using the source code control system [GitHub](https://github.com/). In the following we use the term “source control” for brevity.
+This series of documents describes best practices for source code control in [Terra Workspaces](https://app.terra.bio/) for artifacts like [notebooks](https://support.terra.bio/hc/en-us/articles/360059009571-Notebooks-Quickstart-Guide), Python and R packages, or [workflows](https://support.terra.bio/hc/en-us/articles/360034701991-Pipelining-with-workflows). The goal of this solution is to enable you to manage, share and collaborate on artifacts effectively using the source code control system [GitHub](https://github.com/). In the following we use the term “source control” for brevity.
 
-The initial focus is on source controlling notebooks and not on other artifacts like workflows. Those are discussed separately at a later point in time. Source controlling notebooks is a major predominant use case and will have the biggest benefit for Terra users (inclu`ding All of Us Workbench users).
+The initial focus is on source controlling notebooks and not on other artifacts like workflows. Those are discussed separately at a later point in time. Source controlling notebooks is a major predominant use case and will have the biggest benefit for Terra users (including All of Us Workbench users).
 
-> **All of Us Workbench**. The All of Us workbench differs from the general [Terra.bio](https://app.terra.bio/) system in a few areas. These differences are called out so that this solution applies to the All of Us workbench as well. The differences in the context of source control are addressed in the callouts with the left bar on the side – like this paragraph.
+> **All of Us Workbench**: The All of Us workbench differs from the general [Terra.bio](https://app.terra.bio/) system in a few areas. These differences are called out so that this solution applies to the All of Us workbench as well. The differences in the context of source control are addressed in the callouts with the left bar on the side – like this paragraph.
 
 The best practices do not discuss the management of data like workspace tables, reference data, samples in buckets, tables in BigQuery, or any other data - the discussion is focused on code only.
 
@@ -313,7 +313,7 @@ At this point you have a running cloud environment consisting of a VM, a boot di
     ls -al
     ```
 
-6. This shows the contents of the user’s home directory, where the persistent disk is mounted. You will see a subdirectory with your workspace name *after* you have initiated notebook edits (not shown in the screenshot below). This is where your notebook files live on the PD, [synced with your workspace bucket](https://support.terra.bio/hc/en-us/articles/360047318551-Detachable-Persistent-Disks-#h_01EZD0Y224MPZMZ4XCP3K64RKV).
+6. This shows the contents of the user’s home directory, `/home/jupyter`, where the persistent disk is mounted. You will see a subdirectory with your workspace name *after* you have initiated notebook edits (not shown in the screenshot below). This is where your notebook files live on the PD, [synced with your workspace bucket](https://support.terra.bio/hc/en-us/articles/360047318551-Detachable-Persistent-Disks-#h_01EZD0Y224MPZMZ4XCP3K64RKV).
 
    ![home dir](./images/home_dir.png "home dir")
 
@@ -322,14 +322,12 @@ At this point you have a running cloud environment consisting of a VM, a boot di
     ```sh
     cd /
     ```
-
-
-8. With the following command, you can show all top level directories and files:
+    With the following command, you can show all top level directories and files:
     ```sh
     ls -al
     ```
 
-At this point you have explored the workspace bucket, the VM’s boot disk, and the persistent disk mounted as a subdirectory of the boot disk. This understanding is important later on for the instructions related to source control.
+At this point you have explored the workspace bucket, and the persistent disk mounted as a subdirectory of the boot disk.
 
 ### Persistent disk availability
 
@@ -504,8 +502,8 @@ While [Git](https://git-scm.com/) is a source control system, [GitHub](https://g
 
 As already mentioned GitHub is a web-based version of Git and makes Git’s functionality accessible without having you to maintain a Git deployment yourself. Another implementation of Git is [Bitbucket](https://bitbucket.org/), for example. Git has documented its functionality in a [book](https://git-scm.com/book/en/v2). This is a helpful reference for you to remember.
 
-This solution uses GitHub to implement the various use cases that you might encounter. A discussion of[user journeys](xxx) as well as
-[individual use cases](xxx) is discussed separately for clarity.
+This solution uses GitHub to implement the various use cases that you might encounter. A discussion of user journeys as well as
+individual use cases is discussed separately in [Part III](./terra_source_control_III.md) of this series.
 
 The use cases show how to interact with GitHub using the Git commands in a terminal. Each use case is a set of step-by-step instructions for you to follow in order to execute a use case.
 
@@ -546,7 +544,7 @@ It is possible for you to create additional branches. When you create a new bran
 In general there are a few basic source control processes that you execute:
 
 *   **Working by yourself**. One basic scenario is that you are working by yourself for the duration of your project without sharing or collaborating with other team members or researchers from different organizations. When you work by yourself you have a remote GitHub repository and work with local branches of that repository in your environment. You use GitHub as the remote system that has your artifacts for the reasons discussed in
-[Why source control?](xxx).
+[Why source control?](#why-source-control).
 *   **Collaborating with others**. A different scenario is collaborating with others in a project. In this scenario you use the remote GitHub repository or repositories as a common repository that all collaborating members share. Each collaborator works on the various artifacts locally in local branches and synchronizes the work with the remote repository so that other collaborators can see and incorporate the changes into their local branches. In this case there is over time a constant synchronization between the local and remote branches ensuring consistent progress.
 *   **Initially creating an artifact**. In some cases you are the initiator of a project, and you start creating artifacts as there are no artifacts created yet. In this case you create a remote repository, create the artifact locally and perform a first synchronization from your local to the remote repository. You might then work by yourself or invite collaborating team members over time.
 

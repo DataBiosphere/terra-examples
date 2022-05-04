@@ -36,7 +36,7 @@ Last Updated: 30/03/2022 -->
 The previous document in this series, [Best practices for source control on Terra, Part I: Background](./terra_source_control_I.md), provided some background on Terra and source control concepts.
 
 This document describes best practices for source code control in [Terra Workspaces](https://app.terra.bio/) for artifacts like [notebooks](https://support.terra.bio/hc/en-us/articles/360059009571-Notebooks-Quickstart-Guide),
-[Python and R packages](xxx) or [workflows](https://support.terra.bio/hc/en-us/articles/360034701991-Pipelining-with-workflows). The goal of this solution is to enable you to manage, share and collaborate on artifacts effectively using the source code control system [GitHub](https://github.com/). In the following we use the term “source control” for brevity.
+Python and R packages, or [workflows](https://support.terra.bio/hc/en-us/articles/360034701991-Pipelining-with-workflows). The goal of this solution is to enable you to manage, share and collaborate on artifacts effectively using the source code control system [GitHub](https://github.com/). In the following we use the term “source control” for brevity.
 
 The initial focus is on source controlling notebooks and not on other artifacts like workflows. Those are discussed separately at a later point in time. Source controlling notebooks is a major predominant use case and will have the biggest benefit for Terra users (including All of Us Workbench users).
 
@@ -213,7 +213,7 @@ When working with notebooks you will find two tools very helpful for your daily 
 *   **Jupyter diff tool**. A diff tool that is aware of it being used for Jupyter can display notebook diffs in a more structured way compared to tools that solely show you a diff based on the textual representation of a notebook.
 *   **Cell output removal tool**. A tool that removes cell outputs automatically when you commit changes to GitHub helps ensure that sensitive data is not made available in GitHub.
 
-In the following you will install [nbdime](https://nbdime.readthedocs.io/en/latest/) (**<span style="text-decoration:underline;">n</span>**ote**<span style="text-decoration:underline;">b</span>**ook **<span style="text-decoration:underline;">di</span>**ffing and **<span style="text-decoration:underline;">me</span>**rging) as the diff tool, and [nbstripout](https://pypi.org/project/nbstripout/) as the cell output removal tool.
+In the following you will install [nbdime](https://nbdime.readthedocs.io/en/latest/)(**n**ote**b**ook **di**ffing and **me**rging) as the diff tool, and [nbstripout](https://pypi.org/project/nbstripout/) as the cell output removal tool.
 
 1. Open a workspace with a running cloud environment. If you do not have a running cloud environment, start it
 2. Open a terminal window

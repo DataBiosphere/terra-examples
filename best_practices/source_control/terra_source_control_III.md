@@ -55,7 +55,7 @@ Last Updated: 30/03/2022 -->
 # Introduction and Scope
 
 This document describes best practices for source code control in [Terra Workspaces](https://app.terra.bio/) for artifacts like [notebooks](https://support.terra.bio/hc/en-us/articles/360059009571-Notebooks-Quickstart-Guide),
-[Python and R packages](xxx) or [workflows](https://support.terra.bio/hc/en-us/articles/360034701991-Pipelining-with-workflows). The goal of this solution is to enable you to manage, share and collaborate on artifacts effectively using the source code control system [GitHub](https://github.com/). In the following we use the term “source control” for brevity.
+Python and R packages or [workflows](https://support.terra.bio/hc/en-us/articles/360034701991-Pipelining-with-workflows). The goal of this solution is to enable you to manage, share and collaborate on artifacts effectively using the source code control system [GitHub](https://github.com/). In the following we use the term “source control” for brevity.
 
 The initial focus is on source controlling notebooks and not on other artifacts like workflows. Those are discussed separately at a later point in time. Source controlling notebooks is a major predominant use case and will have the biggest benefit for Terra users (including All of Us Workbench users).
 
@@ -183,7 +183,7 @@ Then, [clone the repo](https://docs.github.com/en/repositories/creating-and-mana
 $ git clone git@github.com:<your-repo>.git
 ```
 
-([Use Case 16](xxx) also walks through this process).
+([Use Case 16](#use-case-16-clone-github-repository) also walks through this process).
 
 
 #### 3. Add some subdirectories under the new repo directory
@@ -259,11 +259,11 @@ When making several changes, you can check the changes in the local repository t
     ```sh
     git status
     ```
-    Note that the output changed from
+    Note that the output changed from:
     ```
     Changes not staged for commit:
     ```
-    to
+    to:
     ```
     Changes to be committed:
     ```
@@ -516,7 +516,6 @@ If you have several branches then it is possible that they advance differently. 
    ```sh
    git branch
    ```
-   ![alt_text](images/image13.png "image_tooltip")
    At this point you have either only the `main` branch, or `main` and `pr`, depending on your previous decisions.
 
 3. Create two branches:
@@ -527,9 +526,9 @@ If you have several branches then it is possible that they advance differently. 
     git branch
     ```
 
-   ![alt_text](images/image14.png "image_tooltip")
+   ![](./images/7rKcprhso4o3T26.png "")
 
-    The two branches, `attempt-1` and `attempt-2` both have the same state as the `main` branch when created (since you created those while being on the `main` branch). Now you will make changes in different branches and commit one of the branches.
+    The two branches, `attempt-1` and `attempt-2`, both have the same state as the `main` branch when created (since you created those while being on the `main` branch). Now you will make changes in different branches and commit one of the branches.
 
 4. In the local repository, switch to the `main` branch and verify that the switch took place:
     ```sh
@@ -615,7 +614,7 @@ Sometimes you reach the end of the workday, however, the work and changes in a n
 
 One possibility to address this situation is to do nothing (yay!). However, in this case the changes you made are only stored on the persistent disk, and those might have been replicated to the workspace bucket if the notebook is known to the Terra workspace. If for any reason the persistent disk is deleted, and the automatic replication to the workspace bucket failed, your work would be lost.
 
-Alternatively, in order to address this risk, you could use GitHub to serve as temporary redundant storage backup. A good practice is to commit and submit that to GitHub at the end of the workday, as indicated already here: [Submitting to GitHub at the end of the day: essential work habit](xxx).
+Alternatively, in order to address this risk, you could use GitHub to serve as temporary redundant storage backup. A good practice is to commit and submit that to GitHub at the end of the workday, as indicated already here: [Submitting to GitHub at the end of the day: essential work habit](#submitting-to-github-at-the-end-of-the-day-essential-work-habit).
 
 You have worked with branches at this point and the best practice is to create a branch in your local repository, copy the notebooks that changed to it, and submit those to the remote repository, following the use cases 2 to 5. In this case no pull request is required as there will be no merge at this point to the main branch.
 
@@ -628,40 +627,23 @@ In GitHub diffs are shown in a more graphical form. Try it out by following thes
 
 1. Log into your GitHub account
 2. Select a repository that contains notebooks that have several versions
-3. Select the **<> Code** tab
+3. Select the **<> Code** tab:
 
-<p id="gdcalert17" ><span style="color: red; font-weight: bold">>>>>  GDC alert: inline image link here (to images/image15.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert18">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>> </span></p>
+   ![](./images/8SG7oMtdjtT42Qj.png "")
 
-![alt_text](images/image15.png "image_tooltip")
+4. Navigate into the source code tree to an individual notebook
 
-4. Navigate into the source code tree to an individual notebook. For example,
+5. Click on "History":
 
+   ![](./images/3FFygkHaHFR9Cmf.png "")
 
-<p id="gdcalert18" ><span style="color: red; font-weight: bold">>>>>  GDC alert: inline image link here (to images/image16.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert19">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>> </span></p>
-
-![alt_text](images/image16.png "image_tooltip")
-
-5. Click on History
-
-<p id="gdcalert19" ><span style="color: red; font-weight: bold">>>>>  GDC alert: inline image link here (to images/image17.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert20">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>> </span></p>
-
-
-![alt_text](images/image17.png "image_tooltip")
 
 This shows all the changes to the notebook over time
 
-7. Click on a hash, for example:
+7. Click on a hash, which will look something like `acb651e`. This shows the changes made compared to the previous version:
 
-<p id="gdcalert20" ><span style="color: red; font-weight: bold">>>>>  GDC alert: inline image link here (to images/image18.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert21">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>> </span></p>
+   ![](./images/7K86aoaeAZkoVSQ.png "")
 
-
-![alt_text](images/image18.png "image_tooltip")
-
-8. This shows the changes made compared to the previous version:
-
-<p id="gdcalert21" ><span style="color: red; font-weight: bold">>>>>  GDC alert: inline image link here (to images/image19.png). Store image on your image server and adjust path/filename/extension if necessary. </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert22">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>> </span></p>
-
-![alt_text](images/image19.png "image_tooltip")
 
 An alternative way is to review the list of pull requests. Each request shows the changes that were applied by executing it. While the above is showing the history for each file individually, pull requests show the changes of all files that were part of the pull request. If you change several files in order to implement a feature, a pull request ties all changes together.
 
@@ -687,13 +669,11 @@ In principle, you can clone any Terra workspace you have access to. This can be 
 
 In any case, in order to clone a workspace, open the workspace and find the menu with the three vertical dots. Click on it, and a menu appears.
 
-
-![alt_text](images/image20.png "image_tooltip")
+![](./images/AypDKAQcs6RK3DD.png "")
 
 Select the **Clone** entry and a form appears, for example:
 
-
-![alt_text](images/image21.png "image_tooltip")
+![](./images/5tbauBRunssRi2u.png "")
 
 Fill in the various fields and click **CLONE WORKSPACE**. The new workspace has copies of the notebooks and you are the owner.
 
@@ -709,20 +689,18 @@ This basically means that you follow the steps to create a new workspace as foll
 1. Navigate to https://app.terra.bio/#workspaces
 2. Click on the ‘**+**’ (plus) icon
 
-
-![alt_text](images/image22.png "image_tooltip")
-
-3. Fill in the details in the appearing form
+   ![](./images/BUMoZZWR3C4nzim.png "")
 
 
-![alt_text](images/image23.png "image_tooltip")
+3. Fill in the details in the form that appears:
+
+   ![](./images/4naM7RUHoCEobGW.png "")
 
 4. Click **CREATE WORKSPACE**
 
 Now you have a new workspace that you can copy existing artifacts into. One approach to adding a document to the workspace is by using the file dialog of Jupyter. This process you have seen before: open a notebook, and click on the Jupyter logo; this opens a file browser dialog that lets you upload files into the Terra cloud environment.
 
-If you upload a notebook, place it into the `<workspace-name>/edit` folder. Once you open the notebook in edit mode, Terra will incorporate it as a notebook known by Terra. This is the process as described in
-[Creating notebooks by copying into edit/ folder](xxx).
+If you upload a notebook, place it into the `<workspace-name>/edit` folder. Once you open the notebook in edit mode, Terra will incorporate it as a notebook known by Terra. This is the process as described in [Creating notebooks by copying into edit/ folder](./terra_source_control_I.md#creating-notebooks-by-copying-into-edit-folder).
 
 > **All of Us Workbench**: The folder is `/home/jupyter/workspaces/<workspace-name>`
 
@@ -768,21 +746,19 @@ It does not necessarily have to be a single repository, it could be several at t
 
 In order to add collaborators to a remote repository, follow these steps:
 
-1. in GitHub, navigate to the **Settings** section:
+1. in GitHub, navigate to the **Settings** section.
 
-   ![alt_text](images/image24.png "image_tooltip")
+2. On the left pane, select **Manage access**:
 
-2. On the left pane, select **Manage access**
+   ![](./images/3uyg4sCAaAbzv89.png "")
 
-   ![alt_text](images/image25.png "image_tooltip")
+3. On the right pane select **Add people**:
 
-3. On the right pane select **Add people**
+   ![](./images/68B5y7xX5vKegDw.png "")
 
-   ![alt_text](images/image26.png "image_tooltip")
+4. The dialog that opens provides you with an interface of selecting collaborators:
 
-4. The dialog that opens provides you with an interface of selecting collaborators
-
-   ![alt_text](images/image27.png "image_tooltip")
+   ![](./images/6BUgymjDGC4onMb.png "")
 
 Once invited, collaborators have access to the remote repository.
 
@@ -832,7 +808,7 @@ In order to clone a GitHub repository, follow these steps:
 
 1. Get the clone URI. It might have different forms as shown in this screenshot
 
-   ![alt_text](images/image28.png "image_tooltip")
+   ![](./images/7X7zxQuGdxVDgBE.png "")
 
 2. Navigate to `$HOME`, or whichever directory in which you want to clone the repo.
 3. Run the [git clone](https://git-scm.com/docs/git-clone) command
@@ -853,12 +829,12 @@ Sometimes it's not possible to clone an existing workspace.  For example, it's n
 ### Use case 17: Populating a new workspace with notebooks from a GitHub repository
 
 1. Create a new workspace
-2. Set up your git environment as described in [Setting up all parts of your work environment](xxx)
+2. Set up your git environment as described in [Setting up all parts of your work environment](./terra_source_control_II.md#setting-up-all-parts-of-your-work-environment)
 
 3. Clone the GitHub repository into your workspace as described in [Use case 16: Clone GitHub repository](#use-case-16-clone-github-repository)
 4. Use [gsutil](https://cloud.google.com/storage/docs/gsutil) to copy the notebooks from your local repository into the `notebooks` folder of the workspace bucket:
    ```sh
-	 gsutil cp $REPO_HOME/notebooks/*.ipynb
+	 gsutil cp $REPO_HOME/notebooks/*.ipynb \
  		$WORKSPACE_BUCKET/notebooks
    ```
 
