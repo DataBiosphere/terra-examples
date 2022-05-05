@@ -18,7 +18,7 @@ Last Updated: 30/03/2022 -->
     - [Switching between journeys](#switching-between-journeys)
     - [Submitting to GitHub at the end of the day: essential work habit](#submitting-to-github-at-the-end-of-the-day-essential-work-habit)
   - [Journey 1: Managing my own work without any collaboration](#journey-1-managing-my-own-work-without-any-collaboration-1)
-    - [Initial setup and ongoing work](#initial-setup-and-ongoing-work)
+    - [Setup and ongoing work](#setup-and-ongoing-work)
     - [Initiating work from the beginning](#initiating-work-from-the-beginning)
     - [Use case 1: Create a new repository and add your files to it](#use-case-1-create-a-new-repository-and-add-your-files-to-it)
       - [1. Create the repository](#1-create-the-repository)
@@ -57,11 +57,11 @@ Last Updated: 30/03/2022 -->
 This document describes best practices for source code control in [Terra Workspaces](https://app.terra.bio/) for artifacts like [notebooks](https://support.terra.bio/hc/en-us/articles/360059009571-Notebooks-Quickstart-Guide),
 Python and R packages or [workflows](https://support.terra.bio/hc/en-us/articles/360034701991-Pipelining-with-workflows). The goal of this solution is to enable you to manage, share and collaborate on artifacts effectively using the source code control system [GitHub](https://github.com/). In the following we use the term “source control” for brevity.
 
-The initial focus is on source controlling notebooks and not on other artifacts like workflows. Those are discussed separately at a later point in time. Source controlling notebooks is a major predominant use case and will have the biggest benefit for Terra users (including All of Us Workbench users).
+The initial focus is on source controlling notebooks and not on other artifacts like workflows. Those are discussed separately at a later point in time. Source controlling notebooks is an important use case and will have the biggest benefit for Terra users (including All of Us Workbench users).
 
 > **All of Us Workbench**: The All of Us workbench differs from the general [Terra.bio](https://app.terra.bio/) system in a few areas. These differences are called out so that this solution applies to the All of Us workbench as well. The differences in the context of source control are addressed in the callouts with the left bar on the side – like this paragraph.
 
-The best practices do not discuss the management of data like workspace tables, reference data, samples in buckets, tables in BigQuery, or any other data - the discussion is focused on code only.
+The best practices do not discuss the management of workspace tables, reference data, samples in buckets, tables in BigQuery, or any other data - the discussion is focused on code only.
 
 While this document walks you through the basics of using git for various use cases, it will be helpful to have a basic understanding of git as well.  The GitHub [documentation](https://docs.github.com/en) and “cheat sheets” like [this one](https://education.github.com/git-cheat-sheet-education.pdf) may be useful.
 
@@ -142,7 +142,7 @@ Note: the auto saving functionality that Terra provides only saves notebooks tha
 This journey outlines the various use cases you use when working by yourself. Many of the use cases apply later to other journeys as well.
 
 
-### Initial setup and ongoing work
+### Setup and ongoing work
 
 Setting up a new local repository is done once. This is outlined by [Use case 1](#use-case-1-create-a-new-repository-and-add-your-files-to-it) next.
 

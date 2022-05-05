@@ -38,11 +38,11 @@ The previous document in this series, [Best practices for source control on Terr
 This document describes best practices for source code control in [Terra Workspaces](https://app.terra.bio/) for artifacts like [notebooks](https://support.terra.bio/hc/en-us/articles/360059009571-Notebooks-Quickstart-Guide),
 Python and R packages, or [workflows](https://support.terra.bio/hc/en-us/articles/360034701991-Pipelining-with-workflows). The goal of this solution is to enable you to manage, share and collaborate on artifacts effectively using the source code control system [GitHub](https://github.com/). In the following we use the term “source control” for brevity.
 
-The initial focus is on source controlling notebooks and not on other artifacts like workflows. Those are discussed separately at a later point in time. Source controlling notebooks is a major predominant use case and will have the biggest benefit for Terra users (including All of Us Workbench users).
+The initial focus is on source controlling notebooks and not on other artifacts like workflows. Those are discussed separately at a later point in time. Source controlling notebooks is an important use case and will have the biggest benefit for Terra users (including All of Us Workbench users).
 
 > **All of Us Workbench**: The All of Us workbench differs from the general [Terra.bio](https://app.terra.bio/) system in a few areas. These differences are called out throughout this document so that it applies to the All of Us workbench as well.
 
-The best practices do not discuss the management of data like workspace tables, reference data, samples in buckets, tables in BigQuery, or any other data - the discussion is focused on code only.
+The best practices do not discuss the management of workspace tables, reference data, samples in buckets, tables in BigQuery, or any other data - the discussion is focused on code only.
 
 # Objectives
 
@@ -420,12 +420,12 @@ At this point it is a good opportunity for you to delete the cloud environment i
 
 Restoring a local repository after your persistent disk was deleted is similar to joining a collaboration with others in the sense that you do not start with an empty repository but join a repository that was created before (even if only by yourself).
 
-This means that restoring a local repository is equivalent to [Journey 4: Joining an ongoing collaboration with others](https://docs.google.com/document/d/1hMPgu9JtbCvELfQ7fApgsSGEjb1GqLso0t2uwaEQUGA/edit?resourcekey=0-gZ-zSjRYpqHa-wMRsoK3Pw#bookmark=id.ju4i52vj6xt2), in .
+This means that restoring a local repository is equivalent to [Journey 4: Joining an ongoing collaboration with others](./terra_source_control_III.md#journey-4-joining-an-ongoing-collaboration-with-others-1).
 
 
 ## What’s next?
 
-At this point, you are ready to dive into various user journeys and use cases. See:
+At this point, you are ready to dive into various user journeys and use cases. See: [Best practices for source control on Terra, Part III: Source control for notebooks](./terra_source_control_III.md).
 
 If you’re not familiar with git, the GitHub [documentation](https://docs.github.com/en) and “cheat sheets” like [this one](https://education.github.com/git-cheat-sheet-education.pdf) or [this one](https://opensource.com/sites/default/files/2022-04/OSDC_cheatsheet-git-2022.4.7.pdf) may be useful.
 

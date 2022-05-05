@@ -52,11 +52,11 @@ Last Updated: 30/03/2022 -->
 
 This series of documents describes best practices for source code control in [Terra Workspaces](https://app.terra.bio/) for artifacts like [notebooks](https://support.terra.bio/hc/en-us/articles/360059009571-Notebooks-Quickstart-Guide), Python and R packages, or [workflows](https://support.terra.bio/hc/en-us/articles/360034701991-Pipelining-with-workflows). The goal of this solution is to enable you to manage, share and collaborate on artifacts effectively using the source code control system [GitHub](https://github.com/). In the following we use the term “source control” for brevity.
 
-The initial focus is on source controlling notebooks and not on other artifacts like workflows. Those are discussed separately at a later point in time. Source controlling notebooks is a major predominant use case and will have the biggest benefit for Terra users (including All of Us Workbench users).
+The initial focus is on source controlling notebooks and not on other artifacts like workflows. Those are discussed separately at a later point in time. Source controlling notebooks is an important use case and will have the biggest benefit for Terra users (including All of Us Workbench users).
 
 > **All of Us Workbench**: The All of Us workbench differs from the general [Terra.bio](https://app.terra.bio/) system in a few areas. These differences are called out so that this solution applies to the All of Us workbench as well. The differences in the context of source control are addressed in the callouts with the left bar on the side – like this paragraph.
 
-The best practices do not discuss the management of data like workspace tables, reference data, samples in buckets, tables in BigQuery, or any other data - the discussion is focused on code only.
+The best practices do not discuss the management of workspace tables, reference data, samples in buckets, tables in BigQuery, or any other data - the discussion is focused on code only.
 
 
 # Objectives
@@ -68,9 +68,9 @@ Reading this document and executing the commands provide you with the required k
 *   Learn about the Terra workspace deployment architecture and understand the various storage systems involved
 *   Learn about several source control user journeys and the use cases that enable them
 
-In this document, we provide some background on Terra and source control concepts.   \
-Then,  dives into the nuts and bolts of setting up your Terra workspace to use source control.  \
-After you’ve finished your configuration and setup,  explores some common use cases and user journeys.
+In this document, we provide some background on Terra and source control concepts.
+Then, [Part II](./terra_source_control_II.md) of this series dives into the nuts and bolts of setting up your Terra workspace to use source control.
+After you’ve finished your configuration and setup, [Part III](./terra_source_control_III.md) explores some common use cases and user journeys.
 
 
 # Part 1 – Background on Terra architecture and source control
@@ -85,7 +85,7 @@ This best practices solution uses Terra-specific terminology. The key terms are:
 *   **Python package**. In addition to installing and using [public Python packages](https://pypi.org/) you might consider developing your own. In this solution, Python packages refer to those you create, manage, share or collaborate on your own or in your lab.
 *   **R package**. Analogous to the Python package.
 *   **Artifacts**. Artifacts are files that contain notebooks, Python packages, R packages or any other content that you might manage by source control. The term artifact is used as a generalization across those file types.
-*   **Workspace artifacts**. Workspace artifacts are all artifacts that you have in your workspace, including notebooks, packages and workflows, but also workspace descriptions (dashboard) and key/value pairs. Different workspaces might have a different number of artifacts of each type, for example, one workspace might only have one notebook whereas other workspaces might have several notebooks.
+*   **Workspace artifacts**. Workspace artifacts are all artifacts that you have in your workspace, including notebooks, packages and workflows, but also workspace descriptions (on the workspace dashboard tab) and key/value pairs. Different workspaces might have a different number of artifacts of each type, for example, one workspace might only have one notebook whereas other workspaces might have several notebooks.
 *   **Version**. A version of an artifact is a uniquely identifiable immutable state of its content. Example identifiers are hash or names. In order to make changes to a version, a copy is (possibly implicitly) created by you and you make the required changes of the content. Once you are satisfied with the changes, you can create another version that again is immutable. The second artifact is a successor version of the first artifact. Names are often based on a [version numbering scheme](https://en.wikipedia.org/wiki/Software_versioning), or version names that you provide.
 *   **Variant**. Variants of an artifact are successor versions, however, they have a common ancestor artifact. For example, based on a version, you might develop two different alternatives of a notebook and decide to version both of those. Once the alternatives are versioned, each is a version of the original, however, they are variants in relation to each other.
 *   **GitHub repository**. Location in GitHub where artifacts are stored and managed. It is possible to have several repositories at the same time and manage different artifacts in each. For now you can think of a GitHub repository as a directory that GitHub recognizes as a unit of source code management.
@@ -181,20 +181,16 @@ To always be on the safe side it is the best practice to not submit proprietary 
 
 This section shows how a Terra workspace, GitHub and the various storage systems like disks and Google Cloud Storage buckets are related. This is important background information for you since you are interfacing and interacting with all of these during source control activities.
 
-An important change took place on September 27th, 2021: [Moving to a project-per-workspace model for improved resource management](https://terra.bio/moving-to-a-project-per-workspace-model-for-improved-resource-management/). This change impacts new workspace creation, and leaves existing workspaces unaffected. Since you might encounter both situations, both architectures are described in the following.
+An important change took place on September 27th, 2021: [Moving to a project-per-workspace model for improved resource management](https://terra.bio/moving-to-a-project-per-workspace-model-for-improved-resource-management/). This change impacts new workspace creation, and leaves existing workspaces unaffected.
 
 
 #### Former workspace architecture
 
 The following diagram shows a scenario displaying the key components from the perspective of you as a user and source control:
 
-
 ![former workspace architecture](./images/former_workspace_architecture.png "former workspace architecture")
 
-
 The relationships between the key components are as follows (additional information is [here](https://support.terra.bio/hc/en-us/articles/360058163311-Understanding-the-Terra-ecosystem-and-how-your-files-live-in-it)):
-
-
 
 *   A billing project can consist of zero, one or more workspaces
 *   A workspace has one workspace bucket. The workspace bucket is a [Google Cloud Storage](https://cloud.google.com/storage) bucket.
@@ -203,7 +199,7 @@ The relationships between the key components are as follows (additional informat
     *   **All of Us Workbench**. You can have only one workspace for each billing project.
 *   A cloud environment has a persistent disk, and zero or one Compute Engine instance (a VM with a boot disk - here shown separately for clarity). The term Compute Engine instance and VM instance are used interchangeably. A cloud environment can be a [Spark cluster](https://support.terra.bio/hc/en-us/articles/360038125912-Understanding-and-adjusting-your-Cloud-Environment) as well, and in this case the master as well as worker nodes have their own disks, but there is no separate persistent disk.
 
-A persistent disk might be removed by you (intentionally or accidentally) even though you are not yet done with your work. In this case you have to recreate the data on the persistent disk, and the section on system setup later shows how this is accomplished by you.
+A persistent disk might be removed by you (intentionally or accidentally) even though you are not yet done with your work. In this case you have to recreate the data on the persistent disk, and the section on system setup later shows how you accomplish this.
 
 > **All of Us Workbench**. Your persistent disk is deleted when your cloud environment is periodically deleted by the system.
 
@@ -219,7 +215,6 @@ The workspace bucket exists as a storage location independent of Compute Engine 
 
 To see the list of cloud environment that you have created, go to https://app.terra.bio/#clusters.
 
-
 #### Current workspace architecture
 
 According to [Moving to a project-per-workspace model for improved resource management](https://terra.bio/moving-to-a-project-per-workspace-model-for-improved-resource-management/) the architecture changes so that each workspace has a dedicated Google Cloud project in a 1:1 relationship. This means that a Cloud Environment is dedicated to a workspace as well and not shared between workspaces anymore.
@@ -228,9 +223,7 @@ The following diagram shows the change.
 
 ![current workspace architecture](./images/current_workspace_architecture.png "current workspace architecture")
 
-
 This depicts the same situation of the architecture above: as user 1 you have to create two cloud environments, one in each workspace, in order to conduct work in both workspaces.
-
 
 #### Deleting a workspace
 
