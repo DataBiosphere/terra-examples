@@ -18,6 +18,7 @@ task RunPapermillNotebook {
         File notebookWorkspacePath
         # See also https://papermill.readthedocs.io/en/latest/usage-cli.html
         String papermillParameters
+        String? packagesToPipInstall
         # See also https://github.com/DataBiosphere/terra-docker/blob/master/terra-jupyter-python/CHANGELOG.md
         String dockerImage = 'us.gcr.io/broad-dsp-gcr-public/terra-jupyter-python:1.0.6'
         Int cpu = 1
@@ -36,6 +37,10 @@ task RunPapermillNotebook {
         set -o errexit
         set -o pipefail
         set -o nounset
+
+        ~{if defined(packagesToPipInstall)
+          then "pip3 install ~{packagesToPipInstall} "
+          else "echo there are no additional packages to pip install "}
 
         # Execute the notebook using our passed parameter values.
         # https://papermill.readthedocs.io/en/latest/usage-execute.html#execute-via-cli
