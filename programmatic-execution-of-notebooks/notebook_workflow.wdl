@@ -39,6 +39,7 @@ task RunPapermillNotebook {
         set -o pipefail
         set -o nounset
 
+
         ~{if defined(packagesToPipInstall)
           then "pip3 install ~{packagesToPipInstall} "
           else "echo there are no additional packages to pip install "}
@@ -56,7 +57,9 @@ task RunPapermillNotebook {
         jupyter nbconvert --to html --ExtractOutputPreprocessor.enabled=False "~{notebookOutputFile}"
         
         # Create a tar to also capture any outputs written to subdirectories, in addition to the current working directory.
-        tar -zcvf ../~{tarOutputsFile} .
+        pwd
+        ls -r *
+        tar -zcvf ~{tarOutputsFile} .
 
         exit ${papermill_exit_code}
     >>>
