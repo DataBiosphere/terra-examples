@@ -28,6 +28,7 @@ task RunPapermillNotebook {
         Int preemptibleAttempts = 3
     }
   
+    String workDir = 'workdir'
     String notebookOutputFile = basename(notebookWorkspacePath, ".ipynb") + "_out.ipynb"
     String notebookHTMLFile = basename(notebookWorkspacePath, ".ipynb") + "_out.html"
     String tarOutputsFile = 'outputs.tar.gz'
@@ -39,6 +40,8 @@ task RunPapermillNotebook {
         set -o pipefail
         set -o nounset
 
+        mkdir -p ~{workDir}
+        cd ~{workDir}
 
         ~{if defined(packagesToPipInstall)
           then "pip3 install ~{packagesToPipInstall} "
@@ -65,8 +68,8 @@ task RunPapermillNotebook {
     >>>
 
     output {
-        Array[File] outputs = glob("*")
-        File tarOutputs = tarOutputsFile
+        Array[File] outputs = glob(workDir + '/' + '*')
+        File tarOutputs = workDir + '/' + tarOutputsFile
     }
 
     # See also https://cromwell.readthedocs.io/en/stable/RuntimeAttributes/#recognized-runtime-attributes-and-backends
