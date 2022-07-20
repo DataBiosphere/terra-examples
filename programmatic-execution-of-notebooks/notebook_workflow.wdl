@@ -42,15 +42,25 @@ task RunPapermillNotebook {
           then "pip3 install ~{packagesToPipInstall} "
           else "echo there are no additional packages to pip install "}
 
-        # Execute the notebook using our passed parameter values.
+        # Execute the notebook using our passed parameter values. If the notebook has an error,
+        # don't exit the task immediately, but do return the error code after the HTML version of
+        # the executed notebook is captured for easy reading.
         # https://papermill.readthedocs.io/en/latest/usage-execute.html#execute-via-cli
+        set +o errexit
         papermill "~{notebookWorkspacePath}" "~{notebookOutputFile}" ~{papermillParameters}
+        papermill_exit_code=$?
+        set -o errexit
 
         # Export the notebook to HTML (without rerunning it) to capture provenance.
         jupyter nbconvert --to html --ExtractOutputPreprocessor.enabled=False "~{notebookOutputFile}"
+        
+        exit ${papermill_exit_code}
     >>>
 
     output {
+        File outputIpynb = notebookOutputFile
+        File outputHtml = notebookHTMLFile
+        # TODO capture output in subdirectories
         Array[File] outputs = glob("*")
     }
 
