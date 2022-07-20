@@ -5,6 +5,8 @@
 #
 # Coding standard https://biowdl.github.io/styleGuidelines.html is used with newer command body
 # style https://github.com/openwdl/wdl/blob/main/versions/1.0/SPEC.md#command-section.
+#
+# TODO add more documentation including params metadata.
 
 version 1.0
 
