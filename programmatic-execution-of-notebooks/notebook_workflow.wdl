@@ -6,7 +6,9 @@
 # Coding standard https://biowdl.github.io/styleGuidelines.html is used with newer command body
 # style https://github.com/openwdl/wdl/blob/main/versions/1.0/SPEC.md#command-section.
 #
-# TODO add more documentation including params metadata.
+# TODO add more documentation including:
+# - params metadata
+# - also that if the notebook has errors, how to look at the HTML version of it
 
 version 1.0
 
@@ -62,16 +64,15 @@ task RunPapermillNotebook {
         jupyter nbconvert --to html --ExtractOutputPreprocessor.enabled=False "~{notebookOutputFile}"
         
         # Create a tar to also capture any outputs written to subdirectories, in addition to the current working directory.
-        pwd
-        ls -r *
         cd ..
-        tar -zcvf ~{tarOutputsFile} ~{workDir}
+        tar -zcvf ~{tarOutputsFile} --directory ~{workDir} --exclude ~{notebookOutputFile} --exclude ~{notebookHTMLFile} .
 
         exit ${papermill_exit_code}
     >>>
 
     output {
-        Array[File] outputs = glob(workDir + '/' + '*')
+        File outputIpynb = workDir + '/' + notebookOutputFile
+        File outputHtml = workDir + '/' + notebookHTMLFile
         File tarOutputs = tarOutputsFile
     }
 
