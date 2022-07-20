@@ -30,6 +30,7 @@ task RunPapermillNotebook {
   
     String notebookOutputFile = basename(notebookWorkspacePath, ".ipynb") + "_out.ipynb"
     String notebookHTMLFile = basename(notebookWorkspacePath, ".ipynb") + "_out.html"
+    String tarOutputsFile = 'outputs.tar.gz'
 
     command <<<
         set -o xtrace
@@ -54,14 +55,15 @@ task RunPapermillNotebook {
         # Export the notebook to HTML (without rerunning it) to capture provenance.
         jupyter nbconvert --to html --ExtractOutputPreprocessor.enabled=False "~{notebookOutputFile}"
         
+        # Create a tar to also capture any outputs written to subdirectories, in addition to the current working directory.
+        tar -zcvf ../~{tarOutputsFile} .
+
         exit ${papermill_exit_code}
     >>>
 
     output {
-        File outputIpynb = notebookOutputFile
-        File outputHtml = notebookHTMLFile
-        # TODO capture output in subdirectories
         Array[File] outputs = glob("*")
+        File tarOutputs = tarOutputsFile
     }
 
     # See also https://cromwell.readthedocs.io/en/stable/RuntimeAttributes/#recognized-runtime-attributes-and-backends
