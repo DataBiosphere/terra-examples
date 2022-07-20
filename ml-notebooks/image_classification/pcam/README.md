@@ -32,7 +32,7 @@ The notebooks show:
 - [Vertex AI Training](https://cloud.google.com/vertex-ai/docs/training/custom-training) via both a training _script_ and a _package_.
 - How to set up and use a [Managed Tensorboard](https://cloud.google.com/vertex-ai/docs/experiments/tensorboard-overview) instance to track training progress.
 - How to upload and [deploy](https://cloud.google.com/vertex-ai/docs/predictions/deploy-model-api) a trained model to a scalable _Endpoint_ that autoscales up as you hit it with traffic; how to do traffic splitting for A/B testing or canarying.
-- How to configure and run a hyperparameter tuning job (and what the Keras-based training code should look like to support this).
+- How to configure and run a Vertex AI Training hyperparameter tuning job (and what the Keras-based training code should look like to support this).
 - How to configure and run a multi-node distributed training job (and what the training code should do to support this option).
 - How to use the **Experiments API** to create an _Experiment_, log info about the training runs (metrics, params, etc.) to the [Metadata Server](https://cloud.google.com/vertex-ai/docs/ml-metadata/introduction), and how to access and analyze the logged data.
 

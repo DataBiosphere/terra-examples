@@ -62,3 +62,16 @@ The **03_vertex_pipelines** notebook shows, in addition to the concepts introduc
 - building and using ‘lightweight’ Python-based custom components; how to generate `yaml` files for the component definitions that can be put under version control and shared.
 - step caching (very useful for iterative development)
 - pipeline control structures: conditionally deploy a model if its metrics are sufficiently good
+
+### Using the Vizier hyperparameter optimization service
+
+The **04_vizier_pcam_model_training** notebook demonstrates the
+use of [Vertex AI Vizier](https://cloud.google.com/vertex-ai/docs/vizier/overview) for
+[hyperparameter (HP) tuning](https://en.wikipedia.org/wiki/Hyperparameter_optimization) of an ML
+model.
+Vertex AI Vizier is a black-box optimization service. You will often see Vertex AI Vizier used to
+optimize hyperparameters of ML models, but it can also perform other optimization tasks.
+
+(For another Terra Vizier example, which does multi-objective optimization on a simple non-ML
+problem, see [this
+notebook](https://github.com/DataBiosphere/terra-example-notebooks/tree/main/ml-notebooks/vizier/vizier-multi-objective-optimization.ipynb).
