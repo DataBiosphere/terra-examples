@@ -64,14 +64,15 @@ task RunPapermillNotebook {
         # Create a tar to also capture any outputs written to subdirectories, in addition to the current working directory.
         pwd
         ls -r *
-        tar -zcvf ~{tarOutputsFile} .
+        cd ..
+        tar -zcvf ~{tarOutputsFile} ~{workDir}
 
         exit ${papermill_exit_code}
     >>>
 
     output {
         Array[File] outputs = glob(workDir + '/' + '*')
-        File tarOutputs = workDir + '/' + tarOutputsFile
+        File tarOutputs = tarOutputsFile
     }
 
     # See also https://cromwell.readthedocs.io/en/stable/RuntimeAttributes/#recognized-runtime-attributes-and-backends
