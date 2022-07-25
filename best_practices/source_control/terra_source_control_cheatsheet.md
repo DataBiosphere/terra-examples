@@ -13,7 +13,7 @@
     - [I accidentally checked a new change to my main branch instead of a feature branch. How to fix this?](#i-accidentally-checked-a-new-change-to-my-main-branch-instead-of-a-feature-branch-how-to-fix-this)
       - [How do I revert a modified file to its committed version?](#how-do-i-revert-a-modified-file-to-its-committed-version)
 
-This document summarizes some of the key practices described by the three-part document in this directory ([Part I](./terra_source_control_I.md), [Part II](./terra_source_control_II.md), [Part III](./terra_source_control_III.md)). It covers to both [Terra.bio](https://app.terra.bio/) (Terra) workspaces and **All of Us Workbench** (AoU) workspaces.  In some cases there are differences between the two platforms.
+This document summarizes some of the key practices described by the three-part document in this directory ([Part I](./terra_source_control_I.md), [Part II](./terra_source_control_II.md), [Part III](./terra_source_control_III.md)). It covers both [Terra.bio](https://app.terra.bio/) (Terra) workspaces and **All of Us Workbench** (AoU) workspaces.  In some cases there are differences between the two platforms.
 
 <!--It's primarily intended for analysts using source control for the materials within the featured workspaces, but these source control practices could be used by any AoU researcher who would like to use source control to manage their analysis code.-->
 
@@ -26,22 +26,28 @@ This screencast demonstrates the use and working principles behind the `nbstripo
 
 [![Img alt text](https://i.imgur.com/7oQHuJ5.png)](https://www.youtube.com/watch?v=BEMP4xacrVc)
 
-On the **All of Us Workbench**, if you are using Git from the terminal of your workspace, `nbstripout` is preinstalled and enabled. You can run `nbstripout --status` to confirm this.
+On the **All of Us Workbench**, if you are using Git from the terminal of your workspace,
+`nbstripout` is preinstalled and enabled. You can run `nbstripout --status` to confirm this.
 
-For Terra example workspaces, you may decide to retain some notebook outputs for explanatory value, depending upon context.  Be sure that you don't retain any sensitive data or personal config.
+For Terra example workspaces, you may decide to retain some notebook outputs for explanatory value,
+depending upon context.  Be sure that you don't retain any sensitive data or personal config.
 
 
 ### Exclude data files
 
-For your repository, use a [gitignore](https://git-scm.com/docs/gitignore) file similar to the [.gitignore](https://github.com/DataBiosphere/terra-example-notebooks/blob/main/.gitignore) in this repository to ensure that CSVs and image files are not accidentally commited to the repository.
+For your repository, use a [gitignore](https://git-scm.com/docs/gitignore) file similar to the
+[.gitignore](https://github.com/DataBiosphere/terra-example-notebooks/blob/main/.gitignore) in this
+repository to ensure that CSVs and image files are not accidentally commited to the repository.
 
-If you are using Git from the terminal of your AoU workbench machine, a global `gitignore` file is preinstalled and enabled. You can view file `/home/jupyter/gitignore_global` to confirm this.
+If you are using Git from the terminal of your AoU workbench machine, a global `gitignore` file is
+preinstalled and enabled. You can view file `/home/jupyter/gitignore_global` to confirm this.
 
 On Terra, depending upon context, you may want to make some exceptions to this rule of thumb, e.g.
 for example input data. It's best to retain a strict `.gitignore` file, and make any exceptions
 manually via `git add`.
 
-Always run `git status` to check the list of files you are about to commit prior to running `git commit`.
+Always run `git status` to check the list of files you are about to commit prior to running `git
+commit`.
 
 ## How to propagate notebook changes to source control
 
@@ -114,20 +120,24 @@ Run the following commands from the Terminal.
       ```
       > *Need help with this step? See the section in `terra_source_control_II.md` on [setting up an ssh-agent](./terra_source_control_II.md#set-up-your-ssh-key-on-your-cloud-environments-persistent-disk).*
 
-  5. Clone the repository. If you like, you can create a sub-directory into which you clone all your repos.  In this example, we're just cloning into the home directory.
+  5. Clone the repository. If you like, you can create a sub-directory into which you clone all your
+     repos.  In this example, we're just cloning into the home directory.
 
-      Note: **this command is just an example**. If you need to commit code to a different repository, be sure to pass the correct value to `git clone`.
+      Note: **this command is just an example**. If you need to commit code to a different
+      repository, be sure to pass the correct value to `git clone`.
 
       ```sh
       git clone git@github.com:all-of-us/workbench-analysis-dev-tools.git
       ```
-      > *Need help with this step? See the section in in `terra_source_control_II.md` on [Cloning a repository](https://docs.google.com/document/d/1jy--NBJqhOQ3urMMVhjV5OG3cSQQefNv5x7fwSKdebo/edit?pli=1#heading=h.ix43zmfvvu4r)*.
+      > *Need help with this step? See the section in `terra_source_control_II.md` on
+       [Cloning a repository](./terra_source_control_II.md#clone-a-first-github-repository)*.
 
 ### (3) Check in your code changes
 
   1. Create a new feature branch for your change.
 
-      Note: **this command is just an example**. If you checked out a different repository, or checked it out into a different place, be sure to pass the correct value to `cd`.
+      Note: **this command is just an example**. If you checked out a different repository, or
+      checked it out into a different place, be sure to pass the correct value to `cd`.
 
       ```sh
       cd workbench-analysis-dev-tools
@@ -136,7 +146,8 @@ Run the following commands from the Terminal.
 
   2. Copy the notebooks from the workspace directory to your Git clone.
 
-      Note: **this command is just an example**. If you checked out a different repository or changed a different notebook, be sure to pass the correct values to `cd` and `cp`.
+      Note: **this command is just an example**. If you checked out a different repository or
+      changed a different notebook, be sure to pass the correct values to `cd` and `cp`.
 
       ```sh
       # Suppose I edited ~/workspaces/myworkspace/run_hail_notebook_in_the_background.ipynb
@@ -146,13 +157,17 @@ Run the following commands from the Terminal.
 
   3. Check that the changes look as you expect.
 
-      Note: **this command is just an example**. If you changed a different notebook, be sure to pass the correct value to `nbdiff`.
+      Note: **this command is just an example**. If you changed a different notebook, be sure to
+      pass the correct value to `nbdiff`.
 
       ```sh
       nbdiff run_hail_notebook_in_the_background.ipynb | more
       # You should see no outputs, only your code changes.
       ```
-      Note: **if you don't see the changes that you expect, ask for some help!** Don't `git commit` or `git push` until you have confirmed that the diff is for the correct file, in the correct repository, and only shows your changes.
+
+      Note: **if you don't see the changes that you expect, ask for some help!** Don't `git commit`
+      or `git push` until you have confirmed that the diff is for the correct file, in the correct
+      repository, and only shows your changes.
 
   4. Commit the change.
 
