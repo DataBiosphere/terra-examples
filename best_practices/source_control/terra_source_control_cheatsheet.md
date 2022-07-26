@@ -13,21 +13,26 @@
     - [I accidentally checked a new change to my main branch instead of a feature branch. How to fix this?](#i-accidentally-checked-a-new-change-to-my-main-branch-instead-of-a-feature-branch-how-to-fix-this)
       - [How do I revert a modified file to its committed version?](#how-do-i-revert-a-modified-file-to-its-committed-version)
 
-This document summarizes some of the key practices described by the three-part document in this directory ([Part I](./terra_source_control_I.md), [Part II](./terra_source_control_II.md), [Part III](./terra_source_control_III.md)). It covers both [Terra.bio](https://app.terra.bio/) (Terra) workspaces and **All of Us Workbench** (AoU) workspaces.  In some cases there are differences between the two platforms.
+This document summarizes some of the key practices described by the three-part document in this directory ([Part I](./terra_source_control_I.md), [Part II](./terra_source_control_II.md), [Part III](./terra_source_control_III.md)). It covers both [Terra.bio](https://app.terra.bio/) (Terra) workspaces and **_All of Us_ Workbench** (_AoU_) workspaces.  In some cases there are differences between the two platforms.
 
-<!--It's primarily intended for analysts using source control for the materials within the featured workspaces, but these source control practices could be used by any AoU researcher who would like to use source control to manage their analysis code.-->
+<!--It's primarily intended for analysts using source control for the materials within the featured workspaces, but these source control practices could be used by any _AoU_ researcher who would like to use source control to manage their analysis code.-->
 
 ## Check only code (no data) into source control
 
 ### Exclude notebook outputs
 
-For the **All of Us Workbench**, the most important thing to remember is **notebooks checked into source control may not contain outputs**. Use [nbstripout](https://github.com/kynan/nbstripout) to remove all notebook outputs.
+For the **_All of Us_ Workbench**, the most important thing to remember is **notebooks checked into source control may not contain outputs**. Use [nbstripout](https://github.com/kynan/nbstripout) to remove all notebook outputs.
 This screencast demonstrates the use and working principles behind the `nbstripout` utility and how to use it as a Git filter:
 
 [![Img alt text](https://i.imgur.com/7oQHuJ5.png)](https://www.youtube.com/watch?v=BEMP4xacrVc)
 
-On the **All of Us Workbench**, if you are using Git from the terminal of your workspace,
+On the **_All of Us_ Workbench**, if you are using Git from the terminal of your workspace,
 `nbstripout` is preinstalled and enabled. You can run `nbstripout --status` to confirm this.
+
+On Terra, you will need to install this utility and configure it as a global git filter. See the
+section in `terra_source_control_II.md` on [Setup of notebook diff and cell output removal
+tools](./terra_source_control_II.md#setup-of-notebook-diff-and-cell-output-removal-tools) for more
+detail.
 
 For Terra example workspaces, you may decide to retain some notebook outputs for explanatory value,
 depending upon context.  Be sure that you don't retain any sensitive data or personal config.
@@ -35,16 +40,20 @@ depending upon context.  Be sure that you don't retain any sensitive data or per
 
 ### Exclude data files
 
-For your repository, use a [gitignore](https://git-scm.com/docs/gitignore) file similar to the
-[.gitignore](https://github.com/DataBiosphere/terra-example-notebooks/blob/main/.gitignore) in this
-repository to ensure that CSVs and image files are not accidentally commited to the repository.
+For your repository, use a [.gitignore](https://git-scm.com/docs/gitignore) file similar to the
+example [gitignore](./gitignore) file in this repo, to ensure that CSVs and image files are not
+accidentally commited to the repository.
 
-If you are using Git from the terminal of your AoU workbench machine, a global `gitignore` file is
+If you are using Git from the terminal of your _AoU_ workbench machine, a global `gitignore` file is
 preinstalled and enabled. You can view file `/home/jupyter/gitignore_global` to confirm this.
 
-On Terra, depending upon context, you may want to make some exceptions to this rule of thumb, e.g.
+On Terra, you will need to create and configure the gitignore file in your workspace. See the
+section in `terra_source_control_II.md` on [Set up a global "gitignore"
+file](./terra_source_control_II.md#set-up-a-global-gitignore-file) for more detail.
+
+<!-- On Terra, depending upon context, you may want to make some exceptions to this rule of thumb, e.g.
 for example input data. It's best to retain a strict `.gitignore` file, and make any exceptions
-manually via `git add`.
+manually via `git add`. -->
 
 Always run `git status` to check the list of files you are about to commit prior to running `git
 commit`.
@@ -60,7 +69,7 @@ To use source control from your workspace, you'll need to set up authentication 
   1. Open a notebook (any notebook) for editing, in the workspace where you would like to use source control.
   2. From the notebook, open the Jupyter console:
 
-        * On AoU, if you are in **edit mode**, choose `File -> open` and the Jupyter console will display in a new browser tab.
+        * On _AoU_, if you are in **edit mode**, choose `File -> open` and the Jupyter console will display in a new browser tab.
 
         * Otherwise— if you are on Terra, or in **playground mode**, right click on the Jupyter logo at the top left of the Workbench UI and then choose `Open Link in New Tab`
 
@@ -127,7 +136,7 @@ Run the following commands from the Terminal.
       repository, be sure to pass the correct value to `git clone`.
 
       ```sh
-      git clone git@github.com:all-of-us/workbench-analysis-dev-tools.git
+      git clone git@github.com:all-of-us/ukb-cross-analysis-demo-project.git
       ```
       > *Need help with this step? See the section in `terra_source_control_II.md` on
        [Cloning a repository](./terra_source_control_II.md#clone-a-first-github-repository)*.
@@ -140,19 +149,20 @@ Run the following commands from the Terminal.
       checked it out into a different place, be sure to pass the correct value to `cd`.
 
       ```sh
-      cd workbench-analysis-dev-tools
+      cd ukb-cross-analysis-demo-project
       git checkout -b my-feature-branch-name  # Create a new working branch in your repo checkout
       ```
 
-  2. Copy the notebooks from the workspace directory to your Git clone.
+  2. Copy modified notebooks from the workspace directory to your Git clone.
 
       Note: **this command is just an example**. If you checked out a different repository or
       changed a different notebook, be sure to pass the correct values to `cd` and `cp`.
 
       ```sh
-      # Suppose I edited ~/workspaces/myworkspace/run_hail_notebook_in_the_background.ipynb
-      cd workbench-analysis-dev-tools/featured_workspaces/preprod/aou-rw-preprod-edf20f2f/
-      cp ~/workspaces/myworkspace/run_hail_notebook_in_the_background.ipynb .
+      # Suppose I edited ~/workspaces/myworkspace/01_aou_lipids_phenotype.ipynb,
+      # one of the notebooks from the ukb-cross-analysis-demo-project repo.
+      cd ukb-cross-analysis-demo-project/aou_workbench_siloed_analyses/
+      cp ~/workspaces/myworkspace/01_aou_lipids_phenotype.ipynb .
       ```
 
   3. Check that the changes look as you expect.
@@ -161,7 +171,7 @@ Run the following commands from the Terminal.
       pass the correct value to `nbdiff`.
 
       ```sh
-      nbdiff run_hail_notebook_in_the_background.ipynb | more
+      nbdiff 01_aou_lipids_phenotype.ipynb | more
       # You should see no outputs, only your code changes.
       ```
 
@@ -174,7 +184,7 @@ Run the following commands from the Terminal.
       Note: **this command is just an example**. If you changed a different notebook, be sure to pass the correct value to `git add`.
 
       ```sh
-      git add run_hail_notebook_in_the_background.ipynb
+      git add 01_aou_lipids_phenotype.ipynb
       git status
       # You should see only the files you intend to commit listed (e.g., no data files).
       git commit

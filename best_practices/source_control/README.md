@@ -9,9 +9,9 @@ using the source code control system [GitHub](https://github.com/).
 
 The initial focus is on source controlling notebooks and not on other artifacts like workflows.
 Source controlling notebooks is an important use case and will have a large benefit for Terra users
-(including All of Us Workbench users).
+(including *All of Us* Workbench users).
 
 If you already have some familiarity with GitHub, you may want to look first at the ['cheatsheet'
 quick start](./terra_source_control_cheatsheet.md).
 
-> **All of Us Workbench**. The All of Us workbench differs from the general [Terra.bio](https://app.terra.bio/) system in a few areas. These differences are called out so that this solution applies to the All of Us workbench as well. The differences in the context of source control are addressed in the callouts with the left bar on the side – like this paragraph.
+> **_All of Us_ Workbench**. The *All of Us* workbench differs from the general [Terra.bio](https://app.terra.bio/) system in a few areas. These differences are called out so that this solution applies to the *All of Us* workbench as well. The differences in the context of source control are addressed in the callouts with the left bar on the side – like this paragraph.

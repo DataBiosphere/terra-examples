@@ -57,9 +57,9 @@ Last Updated: 30/03/2022 -->
 This document describes best practices for source code control in [Terra Workspaces](https://app.terra.bio/) for artifacts like [notebooks](https://support.terra.bio/hc/en-us/articles/360059009571-Notebooks-Quickstart-Guide),
 Python and R packages or [workflows](https://support.terra.bio/hc/en-us/articles/360034701991-Pipelining-with-workflows). The goal of this solution is to enable you to manage, share and collaborate on artifacts effectively using the source code control system [GitHub](https://github.com/). In the following we use the term “source control” for brevity.
 
-The initial focus is on source controlling notebooks and not on other artifacts like workflows. Those are discussed separately at a later point in time. Source controlling notebooks is an important use case and will have the biggest benefit for Terra users (including All of Us Workbench users).
+The initial focus is on source controlling notebooks and not on other artifacts like workflows. Those are discussed separately at a later point in time. Source controlling notebooks is an important use case and will have the biggest benefit for Terra users (including _All of Us_ Workbench users).
 
-> **All of Us Workbench**: The All of Us workbench differs from the general [Terra.bio](https://app.terra.bio/) system in a few areas. These differences are called out so that this solution applies to the All of Us workbench as well. The differences in the context of source control are addressed in the callouts with the left bar on the side – like this paragraph.
+> **_All of Us_ Workbench**: The _All of Us_ workbench differs from the general [Terra.bio](https://app.terra.bio/) system in a few areas. These differences are called out so that this solution applies to the _All of Us_ workbench as well. The differences in the context of source control are addressed in the callouts with the left bar on the side – like this paragraph.
 
 The best practices do not discuss the management of workspace tables, reference data, samples in buckets, tables in BigQuery, or any other data - the discussion is focused on code only.
 
@@ -132,7 +132,7 @@ Of course, it might be entirely possible that at the end of the day your work is
 
 To repeat it here, any changes you make to notebooks will only be in the local GitHub repository if you copy them from the `edit/` directory to the local GitHub repository before submitting the changes to GitHub.
 
-**All of Us Workbench**. The folder is `/home/jupyter/workspaces/<workspace-name>`
+**_All of Us_ Workbench**. The folder is `/home/jupyter/workspaces/<workspace-name>`
 
 Note: the auto saving functionality that Terra provides only saves notebooks that are in the `edit/` directory. It does not save any other artifacts, and it does not save notebooks from any other directory location. Because of this restriction it is best that you do not rely on the autosaving functionality and instead submit to GitHub when you want to save your work.
 
@@ -221,7 +221,7 @@ Once you are done making changes to a notebook, or if you want to record a parti
    WS_NAME=<your-workspace-name>`
    cp $HOME/$WS_NAME/edit/<notebook> $REPO_HOME/notebooks
    ```
-   > **All of Us Workbench**: The workspace folder is `/home/jupyter/workspaces/<workspace-name>`
+   > **_All of Us_ Workbench**: The workspace folder is `/home/jupyter/workspaces/<workspace-name>`
 
 3. Navigate to the local repository
     ```sh
@@ -540,7 +540,7 @@ If you have several branches then it is possible that they advance differently. 
     ```sh
     cp notebooks/<your-notebook> $HOME/<workspace-name>/edit/
     ```
-    > **All of Us Workbench**: The folder is `/home/jupyter/workspaces/<workspace-name>`
+    > **_All of Us_ Workbench**: The folder is `/home/jupyter/workspaces/<workspace-name>`
 
 5. Change the notebook by e.g. adding a cell
 6. Copy the notebook to the branch `attempt-1` and stage the change:
@@ -702,7 +702,7 @@ Now you have a new workspace that you can copy existing artifacts into. One appr
 
 If you upload a notebook, place it into the `<workspace-name>/edit` folder. Once you open the notebook in edit mode, Terra will incorporate it as a notebook known by Terra. This is the process as described in [Creating notebooks by copying into edit/ folder](./terra_source_control_I.md#creating-notebooks-by-copying-into-edit-folder).
 
-> **All of Us Workbench**: The folder is `/home/jupyter/workspaces/<workspace-name>`
+> **_All of Us_ Workbench**: The folder is `/home/jupyter/workspaces/<workspace-name>`
 
 ### Next steps
 
