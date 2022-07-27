@@ -20,6 +20,7 @@ Last Updated: 30/03/2022 -->
   - [Test authentication](#test-authentication)
   - [Git setup](#git-setup)
   - [Setup of notebook diff and cell output removal tools](#setup-of-notebook-diff-and-cell-output-removal-tools)
+  - [Set up a global "gitignore" file](#set-up-a-global-gitignore-file)
   - [Clone a first GitHub repository](#clone-a-first-github-repository)
     - [**Clone the repository**](#clone-the-repository)
     - [Modify a notebook](#modify-a-notebook)
@@ -38,9 +39,9 @@ The previous document in this series, [Best practices for source control on Terr
 This document describes best practices for source code control in [Terra Workspaces](https://app.terra.bio/) for artifacts like [notebooks](https://support.terra.bio/hc/en-us/articles/360059009571-Notebooks-Quickstart-Guide),
 Python and R packages, or [workflows](https://support.terra.bio/hc/en-us/articles/360034701991-Pipelining-with-workflows). The goal of this solution is to enable you to manage, share and collaborate on artifacts effectively using the source code control system [GitHub](https://github.com/). In the following we use the term “source control” for brevity.
 
-The initial focus is on source controlling notebooks and not on other artifacts like workflows. Those are discussed separately at a later point in time. Source controlling notebooks is an important use case and will have the biggest benefit for Terra users (including All of Us Workbench users).
+The initial focus is on source controlling notebooks and not on other artifacts like workflows. Those are discussed separately at a later point in time. Source controlling notebooks is an important use case and will have the biggest benefit for Terra users (including _All of Us_ Workbench users).
 
-> **All of Us Workbench**: The All of Us workbench differs from the general [Terra.bio](https://app.terra.bio/) system in a few areas. These differences are called out throughout this document so that it applies to the All of Us workbench as well.
+> **_All of Us_ Workbench**: The _All of Us_ workbench differs from the general [Terra.bio](https://app.terra.bio/) system in a few areas. These differences are called out throughout this document so that it applies to the _All of Us_ workbench as well.
 
 The best practices do not discuss the management of workspace tables, reference data, samples in buckets, tables in BigQuery, or any other data - the discussion is focused on code only.
 
@@ -227,6 +228,10 @@ In the following you will install [nbdime](https://nbdime.readthedocs.io/en/late
     WARNING: You are using pip version 21.1.3; however, version 21.2.4 is available.
     You should consider upgrading via the '/opt/conda/bin/python3.7 -m pip install --upgrade pip' command.
     ```
+    Then, make sure these tools are on your `PATH`.  You may need to run:
+    ```sh
+    export PATH=$PATH:/home/jupyter/.local/bin
+    ```
 
 4. To check the successful installation, run the following
     ```sh
@@ -271,6 +276,33 @@ At this point the two tools are installed and enabled for all GitHub repositorie
   ![](./images/BCQ8yjtSnzDfpYW.png "")
 
   This control is not related to the `nbdime` tool that you just installed, and is not currently functional. In the following this is ignored and not further discussed.
+
+## Set up a global "gitignore" file
+
+For your repository, use a [.gitignore](https://git-scm.com/docs/gitignore) file similar to the
+example [gitignore](./gitignore) file in this repo, to ensure that CSVs and image files are not
+accidentally commited to the repository.
+
+If you are using Git from the terminal of your _AoU_ workbench machine, a global `gitignore` file is
+preinstalled and enabled. You can view file `/home/jupyter/gitignore_global` to confirm this.
+
+On Terra, you will need to create and configure the gitignore file.  You can do that as follows:
+
+1. Upload the [gitignore](./gitignore) example file to your workspace, or open an editor in the
+   Cloud Environment Terminal and create a new file with its contents.
+
+2. Rename the file to `~/.gitignore_global` in your home directory, e.g:
+
+   ```sh
+   mv gitignore ~/.gitignore_global
+   ```
+   Tip: to list "dot files" like `.gitignore_global`, use the `-a` flag: `ls -a`.
+
+3. Then, configure Git to use this file for all repositories:
+
+   ```sh
+   git config --global core.excludesfile ~/.gitignore_global
+   ```
 
 
 ## Clone a first GitHub repository
@@ -404,7 +436,7 @@ rm -fr site-selection-tool
 
 ## Restore after cloud environment and persistent disk deletion
 
-> **All of Us Workbench**. This section is relevant to you since your Cloud Environment and its persistent disk are periodically deleted by the system.
+> **_All of Us_ Workbench**. This section is relevant to you since your Cloud Environment and its persistent disk are periodically deleted by the system.
 
 If you deleted the cloud environment as well as your persistent disk, then you have to recreate both. There are basically two different situations
 

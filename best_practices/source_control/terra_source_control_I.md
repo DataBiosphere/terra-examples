@@ -52,9 +52,9 @@ Last Updated: 30/03/2022 -->
 
 This series of documents describes best practices for source code control in [Terra Workspaces](https://app.terra.bio/) for artifacts like [notebooks](https://support.terra.bio/hc/en-us/articles/360059009571-Notebooks-Quickstart-Guide), Python and R packages, or [workflows](https://support.terra.bio/hc/en-us/articles/360034701991-Pipelining-with-workflows). The goal of this solution is to enable you to manage, share and collaborate on artifacts effectively using the source code control system [GitHub](https://github.com/). In the following we use the term “source control” for brevity.
 
-The initial focus is on source controlling notebooks and not on other artifacts like workflows. Those are discussed separately at a later point in time. Source controlling notebooks is an important use case and will have the biggest benefit for Terra users (including All of Us Workbench users).
+The initial focus is on source controlling notebooks and not on other artifacts like workflows. Those are discussed separately at a later point in time. Source controlling notebooks is an important use case and will have the biggest benefit for Terra users (including _All of Us_ Workbench users).
 
-> **All of Us Workbench**: The All of Us workbench differs from the general [Terra.bio](https://app.terra.bio/) system in a few areas. These differences are called out so that this solution applies to the All of Us workbench as well. The differences in the context of source control are addressed in the callouts with the left bar on the side – like this paragraph.
+> **_All of Us_ Workbench**: The _All of Us_ workbench differs from the general [Terra.bio](https://app.terra.bio/) system in a few areas. These differences are called out so that this solution applies to the _All of Us_ workbench as well. The differences in the context of source control are addressed in the callouts with the left bar on the side – like this paragraph.
 
 The best practices do not discuss the management of workspace tables, reference data, samples in buckets, tables in BigQuery, or any other data - the discussion is focused on code only.
 
@@ -90,7 +90,7 @@ This best practices solution uses Terra-specific terminology. The key terms are:
 *   **Variant**. Variants of an artifact are successor versions, however, they have a common ancestor artifact. For example, based on a version, you might develop two different alternatives of a notebook and decide to version both of those. Once the alternatives are versioned, each is a version of the original, however, they are variants in relation to each other.
 *   **GitHub repository**. Location in GitHub where artifacts are stored and managed. It is possible to have several repositories at the same time and manage different artifacts in each. For now you can think of a GitHub repository as a directory that GitHub recognizes as a unit of source code management.
 
-> **All of Us Workbench**. Almost all content of this document is applicable to the workbench environment, too, with the exception that the workbench does not yet support WDL workflows. Whenever you see “Terra”, mentally replace it with “workbench”. Also note that the user interface screenshots are of Terra user interfaces; so you need to relate those to the equivalent user interface in the workbench.
+> **_All of Us_ Workbench**. Almost all content of this document is applicable to the workbench environment, too, with the exception that the workbench does not yet support WDL workflows. Whenever you see “Terra”, mentally replace it with “workbench”. Also note that the user interface screenshots are of Terra user interfaces; so you need to relate those to the equivalent user interface in the workbench.
 
 
 ## Why source control?
@@ -169,7 +169,7 @@ For artifacts that are not notebooks you have to ensure yourself that any propri
 
 To always be on the safe side it is the best practice to not submit proprietary data to GitHub. This ensures that data isn’t shared unintentionally.
 
-> **All of Us Workbench**. Two protections are installed by default in your environment:
+> **_All of Us_ Workbench**. Two protections are installed by default in your environment:
 *   **Source control safety for notebook files with [nbstripout](https://github.com/kynan/nbstripout).** This is enabled by default for all Git repositories cloned to the cloud environment to ensure that notebook outputs are removed prior to committing notebooks to repositories.
 *   **Source control safety for non-notebook files with a [global gitignore](https://docs.github.com/en/github/getting-started-with-github/getting-started-with-git/ignoring-files#configuring-ignored-files-for-all-repositories-on-your-computer)**. By default only code and documentation files can be committed to Git repositories.
 
@@ -196,12 +196,12 @@ The relationships between the key components are as follows (additional informat
 *   A workspace has one workspace bucket. The workspace bucket is a [Google Cloud Storage](https://cloud.google.com/storage) bucket.
 *   As a user you can have zero or one cloud environments in a billing project (other users may have separate cloud environments in the billing project as well)
 *   Your cloud environment in a billing project supports zero, one or more workspaces in the billing project
-    *   **All of Us Workbench**. You can have only one workspace for each billing project.
+    *   **_All of Us_ Workbench**. You can have only one workspace for each billing project.
 *   A cloud environment has a persistent disk, and zero or one Compute Engine instance (a VM with a boot disk - here shown separately for clarity). The term Compute Engine instance and VM instance are used interchangeably. A cloud environment can be a [Spark cluster](https://support.terra.bio/hc/en-us/articles/360038125912-Understanding-and-adjusting-your-Cloud-Environment) as well, and in this case the master as well as worker nodes have their own disks, but there is no separate persistent disk.
 
 A persistent disk might be removed by you (intentionally or accidentally) even though you are not yet done with your work. In this case you have to recreate the data on the persistent disk, and the section on system setup later shows how you accomplish this.
 
-> **All of Us Workbench**. Your persistent disk is deleted when your cloud environment is periodically deleted by the system.
+> **_All of Us_ Workbench**. Your persistent disk is deleted when your cloud environment is periodically deleted by the system.
 
 While the VM, its boot disk, and the persistent disk in your cloud environment are accessible only by you, the workspace bucket is accessible by every user that has access to the workspace. Any data that you do not want to share you have to keep in the persistent disk (or the Compute Engine instance boot disk – which is not a good practice as it is deleted every time the Compute Engine instance is deleted and recreated).
 
@@ -236,7 +236,7 @@ In the current architecture, when you delete a workspace, the underlying Google 
 
 The following instructions show you how to access the workspace bucket.
 
-**All of Us Workbench**. You do not have access to the Google Cloud Cloud console. Explore your workspace bucket instead using [gsutil](https://cloud.google.com/storage/docs/gsutil).
+**_All of Us_ Workbench**. You do not have access to the Google Cloud Cloud console. Explore your workspace bucket instead using [gsutil](https://cloud.google.com/storage/docs/gsutil).
 
 1. Open a workspace
 
@@ -284,7 +284,7 @@ At this point you have a running cloud environment consisting of a VM, a boot di
 
    ![terminal icon](./images/terminal.png "terminal icon")
 
-    **All of Us Workbench**: Your icon for opening the terminal looks like this:
+    **_All of Us_ Workbench**: Your icon for opening the terminal looks like this:
     ![aou terminal icon](./images/aou_term.png "aou terminal icon")
 
 2. A separate browser tab opens with a terminal running in it:
@@ -373,7 +373,7 @@ There are different actions you can take on a notebook:
 *   **Create a notebook**. The created notebook is stored in the workspace bucket in the subdirectory called notebooks.
 *   **Edit a notebook**. When you edit a notebook, several actions take place:
     1. The notebook is copied from the workspace bucket to the persistent disk. The directory is: `/home/jupyter/<workspace-name>/edit` , where `<workspace-name>` is the name of your workspace.
-> **All of Us Workbench**. In your case the directory is `/home/jupyter/workspaces/<workspace-name>`
+> **_All of Us_ Workbench**. In your case the directory is `/home/jupyter/workspaces/<workspace-name>`
     1. The notebook opens in the browser window
     2. The notebook is automatically saved every 5 seconds to both locations, the workspace bucket and the persistent disk
 
@@ -404,7 +404,7 @@ Navigate to the workspace bucket to see that the notebook is stored in it:
 
 5. Observe that the notebook you created is present in the **notebooks/** folder
 
-> **All of Us Workbench**: You do not have access to the Google Cloud console. Explore the **notebooks/** folder of your workspace bucket using [gsutil](https://cloud.google.com/storage/docs/gsutil) instead.
+> **_All of Us_ Workbench**: You do not have access to the Google Cloud console. Explore the **notebooks/** folder of your workspace bucket using [gsutil](https://cloud.google.com/storage/docs/gsutil) instead.
 
 At this point the notebook is created, present in the workspace bucket, and not yet on the persistent disk.
 
@@ -469,7 +469,7 @@ In order to access a notebook that you created in a separate directory, follow t
 
 It is possible to place a notebook directly into the `edit/` folder. Initially, the workspace does not recognize this as a known notebook since it was not created using the create dialog in the **NOTEBOOK** tab.
 
-> **All of Us Workbench**: The folder is `/home/jupyter/workspaces/<workspace-name>`
+> **_All of Us_ Workbench**: The folder is `/home/jupyter/workspaces/<workspace-name>`
 
 However, Terra repairs this situation automatically. If you open the new notebook using the same approach as for private notebooks (navigating to the `edit/` folder), the following message is displayed:
    ![out of sync msg](./images/5u8AvUHWCNdgSP3.png "out of sync msg")
