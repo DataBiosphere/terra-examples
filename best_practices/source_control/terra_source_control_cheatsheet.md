@@ -34,9 +34,6 @@ section in `terra_source_control_II.md` on [Setup of notebook diff and cell outp
 tools](./terra_source_control_II.md#setup-of-notebook-diff-and-cell-output-removal-tools) for more
 detail.
 
-For Terra example workspaces, you may decide to retain some notebook outputs for explanatory value,
-depending upon context.  Be sure that you don't retain any sensitive data or personal config.
-
 
 ### Exclude data files
 
