@@ -29,8 +29,11 @@ This screencast demonstrates the use and working principles behind the `nbstripo
 On the **_All of Us_ Workbench**, if you are using Git from the terminal of your workspace,
 `nbstripout` is preinstalled and enabled. You can run `nbstripout --status` to confirm this.
 
-On Terra, you will need to install this utility and configure it as a global git filter. See the
-section in `terra_source_control_II.md` on [Setup of notebook diff and cell output removal
+On Terra, you will need to install this utility and configure it as a global git filter, like so:
+```
+pip3 install --upgrade nbstripout && nbstripout --install --global && nbstripout --status --global
+```
+See the section in `terra_source_control_II.md` on [Setup of notebook diff and cell output removal
 tools](./terra_source_control_II.md#setup-of-notebook-diff-and-cell-output-removal-tools) for more
 detail.
 
@@ -44,8 +47,11 @@ accidentally commited to the repository.
 If you are using Git from the terminal of your _AoU_ workbench machine, a global `gitignore` file is
 preinstalled and enabled. You can view file `/home/jupyter/gitignore_global` to confirm this.
 
-On Terra, you will need to create and configure the gitignore file in your workspace. See the
-section in `terra_source_control_II.md` on [Set up a global "gitignore"
+On Terra, you will need to create and configure the gitignore file in your workspace, like so:
+```
+cd && wget -O global_gitignore https://github.com/DataBiosphere/terra-example-notebooks/blob/main/best_practices/source_control/gitignore && git config --global core.excludesfile ~/global_gitignore
+```
+See the section in `terra_source_control_II.md` on [Set up a global "gitignore"
 file](./terra_source_control_II.md#set-up-a-global-gitignore-file) for more detail.
 
 <!-- On Terra, depending upon context, you may want to make some exceptions to this rule of thumb, e.g.
