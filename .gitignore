@@ -1,6 +1,20 @@
-.ipynb_checkpoints
-*html
-*png
-*csv
-*js
-*rda
+# We want to be sure to, by default, exclude from source control files containing data
+# such as CSVs and images such as PNGs. But note that sometimes there are cases where
+# it is reasonable to include those in source control, and the user must just do `git add -f`
+# to add them. The message users get when trying to add an ignored file gives this instruction.
+# See also
+# https://docs.github.com/en/github/getting-started-with-github/getting-started-with-git/ignoring-files#configuring-ignored-files-for-all-repositories-on-your-computer
+
+# By default, all files should be ignored by git.
+*.*
+# Now, allow the file types that we do want to track via source control.
+!*.ipynb
+!*.py
+!*.r
+!*.R
+!*.wdl
+!*.sh
+# Allow documentation files.
+!*.md
+!*.rst
+!LICENSE*
