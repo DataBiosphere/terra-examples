@@ -49,7 +49,7 @@ preinstalled and enabled. You can view file `/home/jupyter/gitignore_global` to 
 
 On Terra, you will need to create and configure the gitignore file in your workspace, like so:
 ```
-cd && wget -O global_gitignore https://github.com/DataBiosphere/terra-example-notebooks/blob/main/best_practices/source_control/gitignore && git config --global core.excludesfile ~/global_gitignore
+cd && wget -O global_gitignore https://raw.githubusercontent.com/DataBiosphere/terra-examples/main/best_practices/source_control/gitignore && git config --global core.excludesfile ~/global_gitignore
 ```
 See the section in `terra_source_control_II.md` on [Set up a global "gitignore"
 file](./terra_source_control_II.md#set-up-a-global-gitignore-file) for more detail.
