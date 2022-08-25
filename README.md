@@ -4,7 +4,7 @@ This repo contains example Terra notebooks as well as documentation on [source c
 practices](./best_practices/source_control/).
 
 The [terra_notebooks_playground](./terra_notebooks_playground/) directory holds a number of examples
-of how to do useful and commonly-required tasks, for both Python and R environments. View the executed copies of these notebooks in Terra workspace [Terra Notebooks Playground](https://app.terra.bio/#workspaces/help-gatk/Terra%20Notebooks%20Playground).
+of how to do useful and commonly-required tasks, for both Python and R environments. It also includes some notebook-based tools to do things such as create an HTML snapshot of an executed notebook and store it in the Terra workspace bucket. View the executed copies of these notebooks in Terra workspace [Terra Notebooks Playground](https://app.terra.bio/#workspaces/help-gatk/Terra%20Notebooks%20Playground).
 
 The [ml_notebooks](./ml_notebooks/) directory contains some examples of using machine learning on Terra. These notebooks are also available in Terra workspace [ml-on-terra](https://app.terra.bio/#workspaces/verily-terra-solutions/ml-on-terra).
 
