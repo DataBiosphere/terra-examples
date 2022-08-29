@@ -6,3 +6,4 @@ workflows:
     latestTagAsDefault: true
     authors:
       - orcid: 0000-0002-9421-8048
+        email: terra-solutions-team@google.com

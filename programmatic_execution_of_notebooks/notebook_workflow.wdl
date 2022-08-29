@@ -168,5 +168,6 @@ task RunPapermillNotebook {
 
     meta {
         email: 'terra-solutions-team@google.com'
+        description: 'Use WDL to programmatically execute a Jupyter notebook from start to finish, optionally parameterized via [Papermill](https://papermill.readthedocs.io/). For more information, see the [documentation on GitHub](https://github.com/DataBiosphere/terra-examples/tree/main/programmatic_execution_of_notebooks).'
     }
 }
