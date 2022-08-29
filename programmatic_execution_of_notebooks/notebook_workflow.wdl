@@ -98,6 +98,10 @@ task RunPapermillNotebook {
           then "pip3 install ~{packagesToPipInstall} "
           else "echo there are no additional packages to pip install "}
 
+        # Export a few of the commonly used environment variables available to Terra notebooks.
+        export GOOGLE_PROJECT=$(gcloud config get-value project)
+        export PET_SA_EMAIL=$(gcloud config get-value account)
+
         # Execute the notebook using our passed parameter values. If the notebook has an error,
         # don't exit the task immediately, but do return the error code after the HTML version of
         # the executed notebook is captured for easy reading.

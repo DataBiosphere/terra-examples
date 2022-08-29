@@ -3,3 +3,6 @@ workflows:
   - subclass: WDL
     primaryDescriptorPath: /programmatic_execution_of_notebooks/notebook_workflow.wdl
     name: notebook_workflow
+    latestTagAsDefault: true
+    authors:
+      - orcid: 0000-0002-9421-8048
