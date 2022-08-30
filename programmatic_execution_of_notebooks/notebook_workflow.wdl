@@ -91,7 +91,7 @@ task RunPapermillNotebook {
         set -o pipefail
         set -o nounset
 
-        mkdir -p ~{workDirAddATypo}
+        mkdir -p ~{workDir}
         cd ~{workDir}
 
         ~{if defined(packagesToPipInstall)
