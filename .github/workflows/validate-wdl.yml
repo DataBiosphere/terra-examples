@@ -26,10 +26,10 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Validate WDL
         run: |
+          set -o xtrace
           set -o errexit
           set -o pipefail
           set -o nounset
-          set +o errexit
         
           wget --no-clobber --quiet https://github.com/broadinstitute/cromwell/releases/download/78/womtool-78.jar
         
