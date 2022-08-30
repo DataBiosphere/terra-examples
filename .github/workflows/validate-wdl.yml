@@ -31,3 +31,5 @@ jobs:
         
         for WDL_FILE in $(find . -type f -name "*.wdl"); do
           java -jar womtool-78.jar validate ${WDL_FILE}
+        done
+        
