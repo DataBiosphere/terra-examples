@@ -1,23 +1,9 @@
 # Copyright 2022 Verily Life Sciences LLC
 # Use of this source code is governed by a BSD-style license that can be found in the LICENSE file or at https://developers.google.com/open-source/licenses/bsd
 #
-# Use WDL to programmatically execute a Jupyter notebook from start to finish. This workflow will:
-# - Optionally install a list of Python packages before executing the notebook.
-# - Optionally pass parameters to the notebook via Papermill to change its behavior.
-#   See also https://papermill.readthedocs.io/.
-# - Save the executed ipynb file (containing cell outputs) as a result of the workflow.
-# - Also save an HTML copy of the executed ipynb file as a result of the workflow.
-#   This allows the notebook outputs to be read in the cloud console immediately.
-# - If the notebook created any output files or directories underneath the current working directory,
-#   they will also be included in a tar output file.
-#
-# The notebook is executed on a new, clean VM (as opposed to where you normally run notebooks interactively).
-# This is useful not only for reproducibility and provenance, but to specifically confirm that the notebook
-# does not depend on any local dependencies (e.g., files or Python/R packages) installed where you normally
-# use Jupyter interactively.
-#
-# NOTE: If an error occurs during notebook execution, the resulting ipynb and html files are still saved, but
-# you will need to go look for them in the execution directory of the workflow run.
+# Use WDL to programmatically execute a Jupyter notebook from start to finish. See the 'parameter_meta' and
+# 'meta' sections below for documentation. Note that 'meta' is difficult to read because its all on one line
+# but the 'source of truth' for it is the [documentation on GitHub](https://github.com/DataBiosphere/terra-examples/tree/main/programmatic_execution_of_notebooks).'
 #
 # Coding standard https://biowdl.github.io/styleGuidelines.html is used with newer command body
 # style https://github.com/openwdl/wdl/blob/main/versions/1.0/SPEC.md#command-section.
@@ -86,7 +72,13 @@ task RunPapermillNotebook {
 
     command <<<
         set -o xtrace
-        # For any command failures in this script, return the error.
+
+        # Export a few of the commonly used environment variables available to Terra notebooks.
+        export GOOGLE_PROJECT=$(gcloud config get-value project)
+        export PET_SA_EMAIL=$(gcloud config get-value account)
+        # See also https://support.terra.bio/hc/en-us/community/posts/4411972716443-Make-workspace-environment-variables-available-in-workflow-configuration
+
+        # For any command failures in the rest of this script, return the error.
         set -o errexit
         set -o pipefail
         set -o nounset
@@ -164,5 +156,8 @@ task RunPapermillNotebook {
 
     meta {
         email: 'terra-solutions-team@google.com'
+        # NOTE: copy and paste the contents of README.md below. It is the "source of truth" for the workflow description.
+        # Use this command to get rid of the newlines: awk '{printf "%s\\n", $0}' README.md
+        description: '# Programmatic execution of notebooks\n\nIn general, we run Jupyter notebooks **interactively**, but sometimes its useful to run them **programmatically**. Some use cases include:\n\n* A researcher might want to ensure their notebooks run with a known, clean virtual machine configuration without having to guess about the state of the machine they use for interactive analysis (e.g., use the workflow to test that the notebook has no unaccounted for dependencies on locally installed Python packages, R packages, or on local files).\n* A researcher might want to run a notebook with many different sets of parameters, all in parallel.\n* A researcher might have a long running notebook (e.g., taking hours or even days) that they wish to run on a machine separate from where they are working interactively.\n* A researcher might have a notebook that they want to run programmatically but do not wish to take the time to port it to a workflow.\n\n## [notebook_workflow.wdl](./notebook_workflow.wdl)\n\nUse WDL to programmatically execute a Jupyter notebook from start to finish. The notebook is executed on a new, clean\nvirtual machine (as opposed to where you normally run notebooks interactively).\nThis is useful not only for reproducibility and provenance, but to specifically confirm that the notebook\ndoes not depend on any local dependencies (e.g., files or Python/R packages) installed where you normally\nuse Jupyter interactively.\n\nThis workflow will:\n* Optionally install a list of Python packages before executing the notebook.\n  * This is because a kernel restart is often necessary to make use of Python packages installed during notebook execution time.\n  * For R package dependencies, have the notebook install them at the beginning.\n* Optionally pass parameters to the notebook via [Papermill](https://papermill.readthedocs.io/) to change its behavior.\n* Save the executed `ipynb` file (containing cell outputs) as a result of the workflow.\n* Also save an `html` copy of the executed ipynb file as a result of the workflow. This allows the notebook outputs to be read in the cloud console immediately.\n* If the notebook created any output files or directories underneath the current working directory, they will also be included in a tar output file.\n\nDetails and limitations:\n* If an error occurs during notebook execution, the resulting `ipynb` and `html` files are still saved, but\nyou will need to go look for them in the execution directory of the workflow run.\n* This workflow was originally written for [app.terra.bio](https://app.terra.bio) and Google Cloud, but should run successfully on any Cromwell installation.\n* Environment variables `OWNER_EMAIL`, `WORKSPACE_BUCKET`, `WORKSPACE_NAME`, and `WORKSPACE_NAMESPACE` are not currently available, but this may change [in the future](https://www.google.com/url?q=https://support.terra.bio/hc/en-us/community/posts/4411972716443-Make-workspace-environment-variables-available-in-workflow-configuration&sa=D&source=docs&ust=1661812248047678&usg=AOvVaw0jzAJVDbmwco9I4jFIu85L). For now, if your notebook uses those, ensure that you can also inject the desired value via [Papermill](https://papermill.readthedocs.io/) parameters.\n* It is not compatible with notebooks written to run on [Hail](https://hail.is/) clusters.\n'
     }
 }
