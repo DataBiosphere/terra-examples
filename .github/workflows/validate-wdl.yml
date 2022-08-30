@@ -1,35 +1,38 @@
 name: Validate WDL workflow and task definitions
 
+# Controls when the workflow will run
 on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
-    branches: [ main ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ main ]
+    branches: [ "main" ]
+
+  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
-    # Allows manually triggering workflow in GitHub UI on selected branch.
-    # GitHub doc: https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows#workflow_dispatch.
-    # GitHub blog demo: https://github.blog/changelog/2020-07-06-github-actions-manual-triggers-with-workflow_dispatch/.
 
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
+  # This workflow contains a single job called "build"
   build:
-
+    # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
+    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
 
-    - name: Checkout
-      uses: actions/checkout@v2
-
-    - name: Validate WDL
-      run: |
-        set -o errexit
-        set -o pipefail
-        set -o nounset
-        set +o errexit
+      # Runs a set of commands using the runners shell
+      - name: Validate WDL
+        run: |
+          set -o errexit
+          set -o pipefail
+          set -o nounset
+          set +o errexit
         
-        wget --no-clobber --quiet https://github.com/broadinstitute/cromwell/releases/download/78/womtool-78.jar
+          wget --no-clobber --quiet https://github.com/broadinstitute/cromwell/releases/download/78/womtool-78.jar
         
-        for WDL_FILE in $(find . -type f -name "*.wdl"); do
-          java -jar womtool-78.jar validate ${WDL_FILE}
-        done
-        
+          for WDL_FILE in $(find . -type f -name "*.wdl"); do
+              java -jar womtool-78.jar validate ${WDL_FILE}
+          done
