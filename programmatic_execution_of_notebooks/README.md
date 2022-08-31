@@ -48,16 +48,63 @@ Details and limitations:
 * If an error occurs during notebook execution, the resulting `ipynb` files are still saved, but
 you will need to go look for them in the output directory of the workflow run.
 
-### Usage
+## Demonstration notebook [DemoQCResultsWithParameters.ipynb](./DemoQCResultsWithParameters.ipynb)
 
-Ensure dsub is installed in your cloud environment by running the following in the Terra Workspace terminal:
+We have included a notebook to demonstrate how to programmatically execute a notebook using  `notebook.wdl` or
+`dsub_notebook.py` and parameterize it using Papermill parameters. The notebook, `DemoQCREsultsWithParameters.ipynb`, produces
+QC reports from detailed QC analyses which were previously run on three different datasets:
+
+* [The Simons Genome Diversity Project](https://www.simonsfoundation.org/simons-genome-diversity-project/)
+* [1000 Genomes Phase 3](https://www.internationalgenome.org/category/phase-3/)
+* DeepVariant Platinum Genomes
+
+These reports include plots of various distributions and summarizes the problems encountered in a CSV output file. 
+
+### Setup
+
+In a new Terra Workspace, open the terminal and run the following from `/home/jupyter`:
+
+1. Ensure dsub is installed in your cloud environment:
 
 ```
 pip3 install --upgrade dsub
 ```
 
-For a detailed explanation of dsub_notebook.py's flags, run:
+2. Copy `DemoQCResultsWithParameters.ipynb` to `${WORKSPACE_BUCKET}/notebooks`:
+```
+export GITHUB_DIR="https://raw.githubusercontent.com/DataBiosphere/terra-examples/main/programmatic_execution_of_notebooks" && \
+wget -O /tmp/DemoQCResultsWithParameters.ipynb ${GITHUB_DIR}/DemoQCResultsWithParameters.ipynb && \
+gsutil cp /tmp/DemoQCResultsWithParameters.ipynb ${WORKSPACE_BUCKET}/notebooks
+```
+
+3. Copy `dsub_notebook.py` to `/home/jupyter`:
+```
+wget -O ${HOME}/dsub_notebook.py ${GITHUB_DIR}/dsub_notebook.py
+```
+
+### Execute a notebook using `dsub_notebook.py`
+
+Choose one of these three values for the parameter key `DATASET`:
+
+  * `simons` - Simons Genome Diversity Project
+  * `thousand_genomes` - 1000 Genomes Phase 3
+  * `platinum_genomes` DeepVariant Platinum Genomes
+
+Here, we'll run the QC analysis for 1000 Genomes Phase 3:
 
 ```
-python3 dsub_notebook.py --help
+python3 ${HOME}/dsub_notebook.py \
+--notebook_to_run=${WORKSPACE_BUCKET}/notebooks/DemoQCResultsWithParameters.ipynb \
+--parameters "DATASET thousand_genomes" \
+--nodry_run
 ```
+
+In the command output, you'll see a `dstat` command you can run to see the status of your job.
+
+Once it's finished, successfully or not, you can find the fully rendered, timestamped notebook in the `Analyses` tab
+of your workspace. This fully rendered notebook and all resulting files will also be written to the output path on
+Cloud Storage, which defaults to `${WORKSPACE_BUCKET}/dsub/results/<NOTEBOOK>/<USER>/<DATE>/<TIME>`.
+
+### Execute a notebook using `notebook_workflow.wdl`:
+
+TODO
