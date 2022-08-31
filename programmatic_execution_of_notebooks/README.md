@@ -31,7 +31,7 @@ you will need to go look for them in the execution directory of the workflow run
 * Environment variables `OWNER_EMAIL`, `WORKSPACE_BUCKET`, `WORKSPACE_NAME`, and `WORKSPACE_NAMESPACE` are not currently available, but this may change [in the future](https://www.google.com/url?q=https://support.terra.bio/hc/en-us/community/posts/4411972716443-Make-workspace-environment-variables-available-in-workflow-configuration&sa=D&source=docs&ust=1661812248047678&usg=AOvVaw0jzAJVDbmwco9I4jFIu85L). For now, if your notebook uses those, ensure that you can also inject the desired value via [Papermill](https://papermill.readthedocs.io/) parameters.
 * It is not compatible with notebooks written to run on [Hail](https://hail.is/) clusters.
 
-##[dsub_notebook.py][./dsub_notebook.py]
+## [dsub_notebook.py][./dsub_notebook.py]
 
 Use `dsub_notebook.py` to xecute Jupyter notebooks from the Terra Workspace terminal command line.  As with `notebook.wdl`,
 `dsub_notebook.py` executes Jupyter notebooks on a new, clean virtual machine independent of any local dependencies installed where you normally use
