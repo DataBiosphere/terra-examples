@@ -30,3 +30,34 @@ you will need to go look for them in the execution directory of the workflow run
 * This workflow was originally written for [app.terra.bio](https://app.terra.bio) and Google Cloud, but should run successfully on any Cromwell installation.
 * Environment variables `OWNER_EMAIL`, `WORKSPACE_BUCKET`, `WORKSPACE_NAME`, and `WORKSPACE_NAMESPACE` are not currently available, but this may change [in the future](https://www.google.com/url?q=https://support.terra.bio/hc/en-us/community/posts/4411972716443-Make-workspace-environment-variables-available-in-workflow-configuration&sa=D&source=docs&ust=1661812248047678&usg=AOvVaw0jzAJVDbmwco9I4jFIu85L). For now, if your notebook uses those, ensure that you can also inject the desired value via [Papermill](https://papermill.readthedocs.io/) parameters.
 * It is not compatible with notebooks written to run on [Hail](https://hail.is/) clusters.
+
+##[dsub_notebook.py][./dsub_notebook.py]
+
+Use `dsub_notebook.py` to xecute Jupyter notebooks from the Terra Workspace terminal command line.  As with `notebook.wdl`,
+`dsub_notebook.py` executes Jupyter notebooks on a new, clean virtual machine independent of any local dependencies installed where you normally use
+Jupyter interactively.
+
+This script will:
+* Optionally install a list of Python packages before executing the notebook.
+  * This is because a kernel restart is often necessary to make use of Python packages installed during notebook execution time.
+  * For R package dependencies, have the notebook install them at the beginning.
+* Optionally pass parameters to the notebook via [Papermill](https://papermill.readthedocs.io/) to change its behavior.
+* Save the executed `ipynb` file containing cell outputs.
+
+Details and limitations:
+* If an error occurs during notebook execution, the resulting `ipynb` files are still saved, but
+you will need to go look for them in the output directory of the workflow run.
+
+### Usage
+
+Ensure dsub is installed in your cloud environment by running the following in the Terra Workspace terminal:
+
+```
+pip3 install --upgrade dsub
+```
+
+For a detailed explanation of dsub_notebook.py's flags, run:
+
+```
+python3 dsub_notebook.py --help
+```
