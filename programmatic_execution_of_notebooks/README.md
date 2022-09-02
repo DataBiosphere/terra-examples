@@ -2,7 +2,7 @@
 
 In general, we run Jupyter notebooks **interactively**, but sometimes its useful to run them **programmatically**. Some use cases include:
 
-* A researcher might want to ensure their notebooks run with a known, clean virtual machine configuration without having to guess about the state of the machine they use for interactive analysis (e.g., use the workflow to test that the notebook has no unaccounted for dependencies on locally installed Python packages, R packages, or on local files).
+* A researcher might want to ensure their notebooks run with a known, clean virtual machine configuration without having to guess about the state of the machine they use for interactive analysis. In other words, run the notebook programmatically to test that it has no unaccounted for dependencies on locally installed Python packages, R packages, or on local files.
 * A researcher might want to run a notebook with many different sets of parameters, all in parallel.
 * A researcher might have a long running notebook (e.g., taking hours or even days) that they wish to run on a machine separate from where they are working interactively.
 * A researcher might have a notebook that they want to run programmatically but do not wish to take the time to port it to a workflow.
@@ -12,12 +12,12 @@ In general, we run Jupyter notebooks **interactively**, but sometimes its useful
 Use WDL to programmatically execute a Jupyter notebook from start to finish. The notebook is executed on a new, clean
 virtual machine (as opposed to where you normally run notebooks interactively).
 This is useful not only for reproducibility and provenance, but to specifically confirm that the notebook
-does not depend on any local dependencies (e.g., files or Python/R packages) installed where you normally
+does not have unaccounted for dependencies on local files or Python/R packages installed where you normally
 use Jupyter interactively.
 
 This workflow will:
 * Optionally install a list of Python packages before executing the notebook.
-  * This is because a kernel restart is often necessary to make use of Python packages installed during notebook execution time.
+  * This is useful because a kernel restart is often necessary to make use of Python packages installed during notebook execution.
   * For R package dependencies, have the notebook install them at the beginning of the notebook.
 * Optionally pass parameters to the notebook via [Papermill](https://papermill.readthedocs.io/) to change its behavior.
 * Save the executed `ipynb` file (containing cell outputs) as a result of the workflow.
@@ -39,7 +39,7 @@ Jupyter interactively.
 
 This script will:
 * Optionally install a list of Python packages before executing the notebook.
-  * This is because a kernel restart is often necessary to make use of Python packages installed during notebook execution time.
+  * This is useful because a kernel restart is often necessary to make use of Python packages installed during notebook execution time.
   * For R package dependencies, have the notebook install them at the beginning of the notebook.
 * Optionally pass parameters to the notebook via [Papermill](https://papermill.readthedocs.io/) to change its behavior.
 * Save the executed `ipynb` file containing cell outputs.
@@ -48,10 +48,10 @@ Details and limitations:
 * If an error occurs during notebook execution, the resulting `ipynb` files are still saved, but
 you will need to go look for them in the output directory of the workflow run.
 
-## Demonstration notebook [ProgrammaticExecutionDemo.ipynb](./ProgrammaticExecutionDemo.ipynb)
+## Demonstration notebook [programmatic_execution_demo.ipynb](./programmatic_execution_demo.ipynb)
 
 We have included a notebook to demonstrate how to programmatically execute a notebook using  `notebook.wdl` or
-`dsub_notebook.py` and parameterize it using Papermill parameters. The notebook, `ProgrammaticExecutionDemo.ipynb`:
+`dsub_notebook.py` and parameterize it using Papermill parameters. The notebook, `programmatic_execution_demo.ipynb`:
 
 * Generates a set of normally distributed samples
 * Plots a histogram of these samples
@@ -67,7 +67,9 @@ You can control the execution of this notebook with these Papermill parameters:
 
 All of these parameters have reasonable defaults, so you don't need to specify them all.
 
-### Setup
+# Give it a try!
+
+## Setup `dsub_notebook.py`
 
 In a new Terra Workspace, open the terminal and run the following from `/home/jupyter`:
 
@@ -77,11 +79,11 @@ In a new Terra Workspace, open the terminal and run the following from `/home/ju
 pip3 install --upgrade dsub
 ```
 
-2. Copy `ProgrammaticExecutionDemo.ipynb` to `${WORKSPACE_BUCKET}/notebooks`:
+2. Copy `programmatic_execution_demo.ipynb` to `${WORKSPACE_BUCKET}/notebooks`:
 ```
 export GITHUB_DIR="https://raw.githubusercontent.com/DataBiosphere/terra-examples/main/programmatic_execution_of_notebooks" && \
-wget -O /tmp/ProgrammaticExecutionDemo.ipynb ${GITHUB_DIR}/ProgrammaticExecutionDemo.ipynb && \
-gsutil cp /tmp/ProgrammaticExecutionDemo.ipynb ${WORKSPACE_BUCKET}/notebooks
+wget -O /tmp/programmatic_execution_demo.ipynb ${GITHUB_DIR}/programmatic_execution_demo.ipynb && \
+gsutil cp /tmp/programmatic_execution_demo.ipynb ${WORKSPACE_BUCKET}/notebooks
 ```
 
 3. Copy `dsub_notebook.py` to `/home/jupyter`:
@@ -89,13 +91,13 @@ gsutil cp /tmp/ProgrammaticExecutionDemo.ipynb ${WORKSPACE_BUCKET}/notebooks
 wget -O ${HOME}/dsub_notebook.py ${GITHUB_DIR}/dsub_notebook.py
 ```
 
-### Execute a notebook using `dsub_notebook.py`
+## Execute a notebook using `dsub_notebook.py`
 
 Use multiple instance of the `--parameters` flag to set individual Papermill parameters:
 
 ```
 python3 ${HOME}/dsub_notebook.py \
---notebook_to_run=${WORKSPACE_BUCKET}/notebooks/DemoQCResultsWithParameters.ipynb \
+--notebook_to_run=${WORKSPACE_BUCKET}/notebooks/programmatic_execution_demo.ipynb \
 --parameters "MEAN 3" \
 --parameters "STD_DEV 2" \
 --nodry_run
@@ -111,6 +113,10 @@ Try setting an invalid value, for example `--parameters "STD_DEV -1"` to see wha
 execution. You'll find the fully rendered, timestamped notebook in the expected location, but it will contain an error message
 similar to what you'd see in the interactive Jupyter environment.
 
-### Execute a notebook using `notebook_workflow.wdl`:
+## Setup `notebook_workflow.wdl`
 
-TODO
+Import the workflow from [Dockstore](https://dockstore.org/workflows/github.com/DataBiosphere/terra-examples/notebook_workflow:v1.0.1?tab=info) into your https://app.terra.bio workspace.
+
+## Execute a notebook using `notebook_workflow.wdl`
+
+Navigate to your imported workflow in  https://app.terra.bio, upload [notebook_workflow_inputs.json](./notebook_workflow_inputs.json) to set the parameters to run the test notebook, click on 'Save', and click on 'Run Analysis'.
