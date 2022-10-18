@@ -1,5 +1,4 @@
 # Programmatic execution of notebooks
-
 In general, we run Jupyter notebooks **interactively**, but sometimes its useful to run them **programmatically**. Some use cases include:
 
 * A researcher might want to ensure their notebooks run with a known, clean virtual machine configuration without having to guess about the state of the machine they use for interactive analysis. In other words, run the notebook programmatically to test that it has no unaccounted for dependencies on locally installed Python packages, R packages, or on local files.
@@ -48,10 +47,10 @@ Details and limitations:
 * If an error occurs during notebook execution, the resulting `ipynb` files are still saved, but
 you will need to go look for them in the output directory of the workflow run.
 
-## Demonstration notebook [programmatic_execution_demo.ipynb](./programmatic_execution_demo.ipynb)
+## Demonstration notebook [2-programmatic_execution_demo.ipynb](./2-programmatic_execution_demo.ipynb)
 
 We have included a notebook to demonstrate how to programmatically execute a notebook using  `notebook.wdl` or
-`dsub_notebook.py` and parameterize it using Papermill parameters. The notebook, `programmatic_execution_demo.ipynb`:
+`dsub_notebook.py` and parameterize it using Papermill parameters. The notebook, `2-programmatic_execution_demo.ipynb`:
 
 * Generates a set of normally distributed samples
 * Plots a histogram of these samples
@@ -79,11 +78,11 @@ In a new Terra Workspace, open the terminal and run the following from `/home/ju
 pip3 install --upgrade dsub
 ```
 
-2. Copy `programmatic_execution_demo.ipynb` to `${WORKSPACE_BUCKET}/notebooks`:
+2. Copy `2-programmatic_execution_demo.ipynb` to `${WORKSPACE_BUCKET}/notebooks`:
 ```
 export GITHUB_DIR="https://raw.githubusercontent.com/DataBiosphere/terra-examples/main/programmatic_execution_of_notebooks" && \
-wget -O /tmp/programmatic_execution_demo.ipynb ${GITHUB_DIR}/programmatic_execution_demo.ipynb && \
-gsutil cp /tmp/programmatic_execution_demo.ipynb ${WORKSPACE_BUCKET}/notebooks
+wget -O /tmp/2-programmatic_execution_demo.ipynb ${GITHUB_DIR}/2-programmatic_execution_demo.ipynb && \
+gsutil cp /tmp/2-programmatic_execution_demo.ipynb ${WORKSPACE_BUCKET}/notebooks
 ```
 
 3. Copy `dsub_notebook.py` to `/home/jupyter`:
@@ -97,7 +96,7 @@ Use multiple instance of the `--parameters` flag to set individual Papermill par
 
 ```
 python3 ${HOME}/dsub_notebook.py \
---notebook_to_run=${WORKSPACE_BUCKET}/notebooks/programmatic_execution_demo.ipynb \
+--notebook_to_run=${WORKSPACE_BUCKET}/notebooks/2-programmatic_execution_demo.ipynb \
 --parameters "MEAN 3" \
 --parameters "STD_DEV 2" \
 --nodry_run
